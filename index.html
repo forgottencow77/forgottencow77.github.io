@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Website</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+    }
+    .header {
+      background-color: #343a40;
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header h1 {
+      font-size: 2em;
+      margin: 0;
+    }
+    .header nav {
+      display: flex;
+      gap: 20px;
+    }
+    .header nav a {
+      color: #fff;
+      text-decoration: none;
+    }
+    .content {
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+    .content .image {
+      width: 100%;
+      max-height: 300px; /* Adjust height as needed */
+      margin-bottom: 20px;
+    }
+    .content .description {
+      display: flex;
+      gap: 20px;
+    }
+    .content .description p {
+      flex: 1;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1>My Website</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+  <section class="content">
+    <img src="image.jpg" alt="Image" class="image"> <div class="description">
+      <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non odio odio. Donec sed tempus velit. Mauris sit amet nibh egestas, rutrum magna nec, pulvinar tortor. Donec sed tempus velit.
+      </p>
+      <p> Nulla facilisi. Donec pharetra magna at sapien tincidunt, vel scelerisque tellus fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aenean eu leo quam. Pellentesque orci neque, nec varius enim lorem sed egestas.
+      </p>
+    </div>
+  </section>
+</body>
+</html>
