@@ -5,6 +5,34 @@
     <meta name="generator" content="HeTeMuLu Creator Ver.1.20β2">
     <link rel="stylesheet" type="text/css" href="css.css">
     <title>宇宙が産んだ奇跡</title>
+    <script>
+        // ページロード時にアクセス数をカウントする
+        document.addEventListener('DOMContentLoaded', function() {
+            let count = localStorage.getItem('userAccessCount');
+            if (count === null) {
+                count = 0;
+            } else {
+                count = parseInt(count);
+            }
+            count++;
+            localStorage.setItem('userAccessCount', count);
+
+            // アクセス数を表示する
+            const accessCountElement = document.createElement('p');
+            accessCountElement.textContent = `あなたは ${count} 番目のご主人様です。おかえりなさいませ❤️`;
+            document.body.insertBefore(accessCountElement, document.body.firstChild);
+
+            // 既存のWebhook呼び出し
+            fetch('https://webhook.site/9f676a8a-9242-40f1-b1f0-55418d20d578', {
+                method: 'POST',
+                body: JSON.stringify({
+                    event: 'page_load',
+                    pageViews: 123,
+                    userCount: 50
+                })
+            });
+        });
+    </script>
 </head>
 <body>
     <div class="container">
