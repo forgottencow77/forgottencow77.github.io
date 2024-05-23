@@ -30,12 +30,48 @@
             display: flex;
             animation: scroll 5s linear infinite;
         }
+        .access-counter-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .access-counter {
+            font-size: 24px;
+            text-align: center;
+        }
     </style>
+    <script>
+        // Cookieの操作
+        function setCookie(name, value, days) {
+            let expires = "";
+            if (days) {
+                let date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+
+        function getCookie(name) {
+            let nameEQ = name + "=";
+            let ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        function eraseCookie(name) {
+            document.cookie = name + '=; Max-Age=-99999999;';
+        }
+    </script>
 </head>
 <body>
     <div class="header-content">
-        <h1>宇宙が産んだ奇跡</h1>
-        <h1></h1>
+        <h1>宇宙が産んだ奇跡<br>てんかうﾁｬﾝの超次元ホームページ</h1>
     </div>
     <div class="gif-container">
         <div class="scrolling">
@@ -97,5 +133,34 @@
             <img src="duck-dance.gif" class="gif" alt="GIF 56">
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let accessCount = parseInt(getCookie('accessCount')) || 0;
+            accessCount++;
+            setCookie('accessCount', accessCount, 7);
+
+            // アクセス数を表示する
+            const accessCounterContainer = document.createElement('div');
+            accessCounterContainer.className = 'access-counter-container';
+
+            const leftStar = document.createElement('img');
+            leftStar.src = 'star2.gif';
+            leftStar.alt = 'star';
+
+            const rightStar = document.createElement('img');
+            rightStar.src = 'star2.gif';
+            rightStar.alt = 'star';
+
+            const accessCountElement = document.createElement('p');
+            accessCountElement.textContent = `あなたは ${accessCount} 番目のご主人様です。おかえりなさいニャン❤️`;
+            accessCountElement.className = 'access-counter';
+
+            accessCounterContainer.appendChild(leftStar);
+            accessCounterContainer.appendChild(accessCountElement);
+            accessCounterContainer.appendChild(rightStar);
+
+            document.body.appendChild(accessCounterContainer);
+        });
+    </script>
 </body>
 </html>
