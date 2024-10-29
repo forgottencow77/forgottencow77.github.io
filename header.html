@@ -35,9 +35,53 @@
             align-items: center;
             justify-content: center;
             margin-top: 20px;
+            background-image: url('1.gif'); /* 背景画像を設定 */
+            background-size: contain; /* 画像を繰り返し */
+            background-repeat: repeat; /* 繰り返し設定 */
+            background-position: center; /* 画像を中央に配置 */
         }
         .access-counter {
             font-size: 24px;
+            text-align: center;
+        }
+        .floating-title {
+            display: inline-block;
+            animation: float 3s ease-in-out infinite, rainbow 5s linear infinite;
+            padding: 10px;
+            border: 2px solid #ff69b4; /* 枠の色 */
+            border-radius: 10px; /* 角を丸くする */
+            background: linear-gradient(45deg, #ff69b4, #ff1493); /* グラデーション */
+            color: white; /* 文字色 */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* 文字の影 */
+        }
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        @keyframes rainbow {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        .floating-title {
+            background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+            background-size: 400% 400%;
+        }
+        .header-content {
+            background-image: url('star.jpg'); /* 背景画像を設定 */
+            background-size: cover; /* 画像をカバーする */
+            background-position: center; /* 画像を中央に配置 */
+            padding: 20px;
             text-align: center;
         }
     </style>
@@ -71,7 +115,7 @@
 </head>
 <body>
     <div class="header-content">
-        <h1>宇宙が産んだ奇跡<br>てんかうﾁｬﾝの超次元ホームページ</h1>
+        <h1 class="floating-title">✨宇宙の奇跡✨<br>てんかうﾁｬﾝの超次元ホームページ</h1>
     </div>
     <div class="gif-container">
         <div class="scrolling">
