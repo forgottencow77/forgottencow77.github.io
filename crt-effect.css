@@ -125,6 +125,100 @@
 .crt-overlay.crt-completed {
   pointer-events: none;
   opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* CRTシャットダウンエフェクト */
+.crt-screen.shutdown {
+  animation: crt-shutdown 0.8s cubic-bezier(0.2, 0, 0.1, 1) forwards;
+  box-shadow: 0 0 30px rgba(255, 20, 20, 0.7);
+}
+
+@keyframes crt-shutdown {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  20% {
+    transform: translate(-50%, -50%) scale(1.02);
+    opacity: 1;
+  }
+  40% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    filter: brightness(1);
+  }
+  60% {
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0.8;
+    filter: brightness(10);
+  }
+  80% {
+    transform: translate(-50%, -50%) scale(0.1);
+    opacity: 0.4;
+    filter: brightness(20);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0.01);
+    opacity: 0;
+    filter: brightness(30);
+  }
+}
+
+/* CRTグリッチエフェクト */
+.crt-glitch {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0;
+  z-index: 10003;
+  pointer-events: none;
+  animation: crt-glitch-anim 0.5s ease-in-out;
+}
+
+@keyframes crt-glitch-anim {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+    transform: translate(5px, 0);
+  }
+  20% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.8;
+    transform: translate(-3px, 0);
+  }
+  40% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+    transform: translate(0, -3px);
+    filter: hue-rotate(90deg);
+  }
+  60% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 0.8;
+    transform: translate(5px, 5px);
+  }
+  80% {
+    opacity: 0;
+  }
+  90% {
+    opacity: 0.5;
+    transform: translate(-5px, 2px);
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 .scanline {
@@ -150,4 +244,53 @@
     top: 100%;
     opacity: 0.5;
   }
+}
+
+/* ユーザー名入力フォームのスタイル */
+.username-prompt {
+  margin-top: 20px;
+  font-family: "Courier New", monospace;
+  color: #0f0;
+}
+
+.username-label {
+  margin-bottom: 10px;
+  color: #0f0;
+  font-weight: bold;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  color: #0f0;
+}
+
+.username-input {
+  background: transparent;
+  border: none;
+  color: #0f0;
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+  margin-left: 5px;
+  outline: none;
+  caret-color: transparent;
+  text-shadow: 0 0 2px #0f0;
+  width: 70%;
+}
+
+.prompt-cursor {
+  animation: blink 1s infinite;
+  color: #0f0;
+  margin-left: 5px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.login-success {
+  margin-top: 10px;
+  color: #0f0;
+  font-weight: bold;
 }

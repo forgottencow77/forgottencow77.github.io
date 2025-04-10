@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="HeTeMuLu Creator Ver.1.20β2">
+    <link rel="stylesheet" type="text/css" href="css.css">
+    <link rel="stylesheet" type="text/css" href="vrm-viewer.css">
+    <title class="floating-title">てんかうの趣味部屋</title>
+    <script src="vaporwave.js" defer></script>
+    <!-- Three.js と VRM ローダーの読み込み -->
+    <script src="https://unpkg.com/three@0.149.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/three@0.149.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://unpkg.com/@pixiv/three-vrm@0.6.12/lib/three-vrm.min.js"></script>
+    <script src="vrm-viewer.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1 class="site-title">★☆★ てんかうの趣味部屋 ★☆★</h1>
+                <p class="subtitle">〜3Dモデルと趣味の世界〜</p>
+                <img src="star.gif" alt="キラキラ" class="decoration">
+            </div>
+            <div class="marquee-text">
+                <span>★★★ VRMモデルビューアで3Dキャラクターを表示中！ 好きな角度から見てね！ ★★★</span>
+            </div>
+            <div class="access-counter-container">
+                <img src="star2.gif" alt="star" class="rotate-3d">
+                <p class="access-counter blink-text">あなたは <span id="visitor-count">???</span> 人目の訪問者です</p>
+                <img src="star2.gif" alt="star" class="rotate-3d">
+            </div>
+        </header>
+        
+        <nav class="navbar">
+            <ul>
+                <li><img src="2.gif" alt="■" width="15" height="15"><a href="index.html">ホーム</a></li>
+                <li><img src="2.gif" alt="■" width="15" height="15"><a href="#">プロフィール</a></li>
+                <li><img src="2.gif" alt="■" width="15" height="15"><a href="#">日記</a></li>
+                <li><img src="2.gif" alt="■" width="15" height="15"><a href="hobby.html" class="active">趣味</a></li>
+                <li><img src="2.gif" alt="■" width="15" height="15"><a href="oekaki.html">お絵描き掲示板</a></li>
+                <li><img src="2.gif" alt="■" width="15" height="15"><a href="#">リンク集</a></li>
+            </ul>
+        </nav>
+        
+        <div class="base">
+            <div class="hidari">
+                <div class="profile">
+                    <img src="icon.jpg" alt="プロフィールアイコン" class="profile-icon rotate-3d">
+                    <p class="profile-text">こんにちは、てんかうです！</p>
+                </div>
+                
+                <div class="control-panel">
+                    <h3>★ モデルコントロール ★</h3>
+                    <div class="controls">
+                        <button id="reset-position" class="control-button">位置をリセット</button>
+                        <button id="toggle-wireframe" class="control-button">ワイヤーフレーム表示</button>
+                        <div class="slider-container">
+                            <label for="rotation-speed">回転速度:</label>
+                            <input type="range" id="rotation-speed" min="0" max="100" value="30">
+                        </div>
+                    </div>
+                    <p class="control-tip">※ マウスドラッグで回転、ホイールでズームできます</p>
+                </div>
+                
+                <div class="info-box">
+                    <h3>★ VRMモデルについて ★</h3>
+                    <p>
+                        VRMはオープンな3Dアバター規格です。<br>
+                        VirtualCast、VRChat、cluster等様々なVRプラットフォームで使用できます。
+                    </p>
+                    <p>
+                        <a href="https://vrm.dev/ja/" target="_blank" class="blink-link">VRM公式サイト</a>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="migi">
+                <div class="content-box">
+                    <h3>◆ 3Dモデルビューア ◆</h3>
+                    <p>マウスでドラッグして自由に視点を変えられるよ！</p>
+                    
+                    <div class="vrm-container">
+                        <canvas id="vrm-canvas"></canvas>
+                        <div id="loading-screen">
+                            <div class="loading-message">読み込み中...</div>
+                            <div class="loading-bar-container">
+                                <div id="loading-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="vrm-info">
+                        <h4>モデル情報</h4>
+                        <div id="vrm-info">
+                            <!-- VRMモデルの情報がここに表示されます -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="content-box">
+                    <h3>◆ てんかうの趣味コレクション ◆</h3>
+                    <div class="hobby-list">
+                        <div class="hobby-item">
+                            <h4>★ 3DCG ★</h4>
+                            <p>3DCGモデリングが大好きです。VRMモデルも作っています。</p>
+                        </div>
+                        <div class="hobby-item">
+                            <h4>★ レトロゲーム ★</h4>
+                            <p>ドット絵の温かみがたまらない！90年代のゲームが特に好き。</p>
+                        </div>
+                        <div class="hobby-item">
+                            <h4>★ VAPORWAVE ★</h4>
+                            <p>ａｅｓｔｈｅｔｉｃな音楽と視覚的要素に魅了されています。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            <div class="footer-content">
+                <p>© 2024 てんかう. All rights reserved.</p>
+                <p class="small-text">VRMモデルビューアはThree.jsと@pixiv/three-vrm使用</p>
+            </div>
+        </footer>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // アクセスカウンターの設定
+            let accessCount = localStorage.getItem('hobbyAccessCount') || 0;
+            accessCount++;
+            localStorage.setItem('hobbyAccessCount', accessCount);
+            
+            const visitorCountElement = document.getElementById('visitor-count');
+            if (visitorCountElement) {
+                visitorCountElement.textContent = accessCount;
+            }
+        });
+    </script>
+</body>
+</html>

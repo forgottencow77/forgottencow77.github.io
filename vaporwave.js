@@ -5,15 +5,16 @@ document.addEventListener('DOMContentLoaded', function() {
     cursor.className = 'custom-cursor';
     document.body.appendChild(cursor);
 
-    // スターエフェクトの要素を作成
+    // スターエフェクトの要素を作成（大きい星のgifは削除）
     const starContainer = document.createElement('div');
     starContainer.className = 'star-container';
     document.body.appendChild(starContainer);
 
     // マウス移動時にカスタムカーソルを追従
     document.addEventListener('mousemove', function(e) {
-        cursor.style.top = e.clientY + 'px';
-        cursor.style.left = e.clientX + 'px';
+        // カーソルを正確に配置（CSSのtransform: translate(-50%, -50%)を活かす）
+        cursor.style.top = e.clientY + 'px';  // CSSでcentering済みなので調整不要
+        cursor.style.left = e.clientX + 'px'; // CSSでcentering済みなので調整不要
         
         // 星を作成
         if (Math.random() > 0.9) { // 10%の確率で星を生成
@@ -68,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (audioPlayer) {
         const playButton = document.createElement('button');
-        playButton.textContent = '▶ Play Vaporwave';
+        playButton.textContent = '▶ Play BGM';
         playButton.className = 'audio-control';
         playButton.addEventListener('click', function() {
             if (audioPlayer.paused) {
@@ -76,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 playButton.textContent = '❚❚ Pause';
             } else {
                 audioPlayer.pause();
-                playButton.textContent = '▶ Play Vaporwave';
+                playButton.textContent = '▶ Play BGM';
             }
         });
         

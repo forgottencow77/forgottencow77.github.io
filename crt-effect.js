@@ -96,27 +96,134 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('サウンドが利用できません');
   }
   
-  // アニメーション終了後の処理
-  setTimeout(function() {
-    crtFlicker.style.opacity = '1';
-    scanline.style.opacity = '1';
-    document.querySelector('.container').style.opacity = '1';
+  // ML/NLP/NNの高速コンパイル/初期化メッセージを表示する関数
+  function displayMLCompileMessages() {
+    // メッセージの配列
+    const mlMessages = [
+      "INITIALIZING TENSORFLOW v2.14.0...",
+      "LOADING PYTORCH MODEL WEIGHTS... DONE",
+      "COMPILING CUDA KERNELS... COMPLETE",
+      "OPTIMIZING NEURAL NETWORK ARCHITECTURE...",
+      "LOADING BERT-LARGE TRANSFORMER MODEL... 100%",
+      "GPT-4 INITIALIZATION SEQUENCE STARTED...",
+      "GPU ACCELERATION ENABLED (NVIDIA RTX 4090)",
+      "CUDA COMPUTE CAPABILITY: 8.9... OK",
+      "BATCH NORMALIZATION LAYERS INITIALIZED",
+      "ATTENTION MECHANISM OPTIMIZED",
+      "TRANSFORMER SELF-ATTENTION: ENABLED",
+      "LOADING WORD EMBEDDINGS... DONE",
+      "VECTOR DATABASE CONNECTION ESTABLISHED",
+      "INITIALIZING RAG PIPELINE...",
+      "SEMANTIC SEARCH INDEX LOADED",
+      "TOKENIZER INITIALIZATION COMPLETE",
+      "EMBEDDING DIMENSION: 1536",
+      "FINE-TUNING PARAMETERS... OK",
+      "QUANTIZING MODEL FOR PERFORMANCE...",
+      "LOADING VISION TRANSFORMER MODULE...",
+      "DIFFUSION MODEL WEIGHTS LOADED",
+      "SENTIMENT ANALYSIS MODULE READY",
+      "INITIALIZING VAPORWAVE AESTHETICS ENGINE...",
+      "NOSTALGIA COEFFICIENT SET TO MAXIMUM",
+      "RETROWAVE VISUALIZATION COMPLETE",
+      "LAUNCHING CYBERDELIC INTERFACE...",
+      "ACCESS GRANTED: WELCOME TO TENKAUU DIMENSION"
+    ];
     
-    // CRTオーバーレイを完了状態に
-    setTimeout(function() {
-      crtOverlay.classList.add('crt-completed');
-      
-      // スタティックサウンドをフェードアウト
-      if (staticSound.paused === false) {
-        const fadeEffect = setInterval(function() {
-          if (staticSound.volume > 0.05) {
-            staticSound.volume -= 0.05;
-          } else {
-            staticSound.pause();
-            clearInterval(fadeEffect);
-          }
-        }, 100);
-      }
-    }, 500);
-  }, 1500);
+    // メッセージを高速に表示する関数
+    function displayMessagesRapidly() {
+      let i = 0;
+      const interval = setInterval(() => {
+        if (i < mlMessages.length) {
+          const line = document.createElement('div');
+          line.textContent = '> ' + mlMessages[i];
+          systemLog.appendChild(line);
+          
+          // 最新のログメッセージに自動スクロール
+          systemLog.scrollTop = systemLog.scrollHeight;
+          
+          i++;
+        } else {
+          clearInterval(interval);
+          
+          // メッセージ表示後のシャットダウントランジション処理
+          setTimeout(() => {
+            crtFlicker.style.opacity = '1';
+            scanline.style.opacity = '1';
+            
+            // グリッチエフェクトを追加
+            const glitchEffect = document.createElement('div');
+            glitchEffect.className = 'crt-glitch';
+            crtScreen.appendChild(glitchEffect);
+            
+            // 電源オフ音を再生（利用可能な場合）
+            try {
+              const powerOffSound = new Audio('power-off.mp3');
+              powerOffSound.volume = 0.6; // 音量を上げる
+              powerOffSound.preload = 'auto'; // プリロードを強制
+              powerOffSound.muted = false; // 明示的にミュート解除
+
+              // AudioContext を使用して自動再生の制限を回避する方法
+              const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+              const source = audioContext.createMediaElementSource(powerOffSound);
+              source.connect(audioContext.destination);
+              
+              // audioContext を使って再生を開始
+              if (audioContext.state === 'suspended') {
+                audioContext.resume().then(() => {
+                  console.log('AudioContext再開');
+                  powerOffSound.play();
+                });
+              } else {
+                powerOffSound.play();
+              }
+              
+              // 通常の方法でも試みる（バックアップ）
+              setTimeout(() => {
+                powerOffSound.play().catch(e => {
+                  console.log('通常再生方法失敗:', e);
+                });
+              }, 100);
+            } catch (e) {
+              console.log('音声ファイルが利用できません:', e);
+            }
+            
+            // CRTシャットダウンアニメーションを適用
+            setTimeout(() => {
+              // シャットダウンクラスを追加してアニメーション開始
+              crtScreen.classList.add('shutdown');
+              
+              // スタティックサウンドをフェードアウト
+              if (staticSound.paused === false) {
+                const fadeEffect = setInterval(() => {
+                  if (staticSound.volume > 0.05) {
+                    staticSound.volume -= 0.05;
+                  } else {
+                    staticSound.pause();
+                    clearInterval(fadeEffect);
+                  }
+                }, 50);
+              }
+              
+              // ウェブサイトのコンテンツを表示（シャットダウンアニメーションと同時）
+              document.querySelector('.container').style.opacity = '1';
+              
+              // CRTシャットダウンアニメーション終了後にオーバーレイを完全に非表示
+              setTimeout(() => {
+                crtOverlay.classList.add('crt-completed');
+              }, 800); // シャットダウンアニメーションの時間と合わせる
+            }, 500);
+          }, 300);
+        }
+      }, 100); // 高速表示のため、100ミリ秒ごとにメッセージを表示
+    }
+    
+    // 高速メッセージ表示を開始
+    displayMessagesRapidly();
+  }
+  
+  // アニメーション終了後の処理
+  setTimeout(() => {
+    // システムログが完了したら高速コンパイルメッセージを表示
+    displayMLCompileMessages();
+  }, 2000); // システムログが少し表示された後に高速メッセージを開始
 });

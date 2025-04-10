@@ -1,0 +1,204 @@
+/* VRMモデルビューアのスタイル */
+.vrm-container {
+    width: 100%;
+    height: 450px;
+    position: relative;
+    margin: 15px 0;
+    background-color: #000033;
+    border: 2px solid #6699ff;
+    box-shadow: 0 0 10px #6699ff, inset 0 0 20px rgba(102, 153, 255, 0.3);
+    overflow: hidden;
+}
+
+#vrm-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+#loading-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 51, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #6699ff;
+    transition: opacity 0.5s ease-out;
+}
+
+.loading-message {
+    font-size: 18px;
+    margin-bottom: 15px;
+    text-shadow: 0 0 5px #6699ff;
+    animation: blink 1s infinite;
+}
+
+.loading-bar-container {
+    width: 60%;
+    height: 20px;
+    background-color: #000015;
+    border: 1px solid #6699ff;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+#loading-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(to right, #00ccff, #6699ff);
+    transition: width 0.3s ease;
+}
+
+.vrm-info {
+    margin-top: 15px;
+    background-color: #000033;
+    border: 1px solid #6699ff;
+    padding: 10px;
+}
+
+.vrm-info h4 {
+    color: #ff71ce;
+    border-bottom: 1px dashed #6699ff;
+    padding-bottom: 5px;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+#vrm-info {
+    color: #ffffff;
+    font-size: 14px;
+}
+
+#vrm-info p {
+    margin: 5px 0;
+}
+
+.control-panel {
+    background-color: #000033;
+    border: 1px solid #6699ff;
+    padding: 10px;
+    margin-top: 15px;
+}
+
+.control-panel h3 {
+    color: #ffcc00;
+    text-align: center;
+    margin-top: 0;
+    border-bottom: 1px dashed #6699ff;
+    padding-bottom: 5px;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.control-button {
+    background: linear-gradient(to bottom, #6699ff, #003399);
+    color: white;
+    border: 1px solid #99ccff;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 3px;
+}
+
+.control-button:hover {
+    background: linear-gradient(to bottom, #99ccff, #6699ff);
+}
+
+.slider-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.slider-container label {
+    color: #99ccff;
+    margin-bottom: 5px;
+}
+
+.slider-container input[type="range"] {
+    width: 100%;
+    background: #000015;
+}
+
+.control-tip {
+    color: #99ccff;
+    font-size: 12px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.info-box {
+    background-color: #000033;
+    border: 1px solid #6699ff;
+    padding: 10px;
+    margin-top: 15px;
+}
+
+.info-box h3 {
+    color: #ffcc00;
+    text-align: center;
+    margin-top: 0;
+    border-bottom: 1px dashed #6699ff;
+    padding-bottom: 5px;
+}
+
+.info-box p {
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.blink-link {
+    color: #00ffff;
+    text-decoration: none;
+    animation: blink-slow 2s infinite;
+}
+
+@keyframes blink-slow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.hobby-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.hobby-item {
+    background-color: #000033;
+    border: 1px solid #6699ff;
+    padding: 10px;
+}
+
+.hobby-item h4 {
+    color: #ff71ce;
+    margin-top: 0;
+    margin-bottom: 5px;
+    text-shadow: 0 0 5px #ff71ce;
+}
+
+.hobby-item p {
+    color: #ffffff;
+    margin: 0;
+}
+
+/* スマホ対応 */
+@media (max-width: 768px) {
+    .vrm-container {
+        height: 350px;
+    }
+    
+    .loading-bar-container {
+        width: 80%;
+    }
+}
