@@ -8,11 +8,21 @@
     <link rel="stylesheet" type="text/css" href="vrm-viewer.css">
     <title class="floating-title">てんかうの趣味部屋</title>
     <script src="vaporwave.js" defer></script>
-    <!-- Three.js と VRM ローダーの読み込み -->
-    <script src="https://unpkg.com/three@0.149.0/build/three.min.js"></script>
-    <script src="https://unpkg.com/three@0.149.0/examples/js/controls/OrbitControls.js"></script>
-    <script src="https://unpkg.com/@pixiv/three-vrm@0.6.12/lib/three-vrm.min.js"></script>
-    <script src="vrm-viewer.js" defer></script>
+    
+    <!-- Import maps polyfill -->
+    <script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+    
+    <!-- Three.js と VRM ローダーの読み込み（最新のインポートマップ方式） -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.159.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.159.0/examples/jsm/",
+            "@pixiv/three-vrm": "https://unpkg.com/@pixiv/three-vrm@2.0.7/lib/three-vrm.module.js"
+        }
+    }
+    </script>
+    <script src="vrm-viewer.js" type="module" defer></script>
 </head>
 <body>
     <div class="container">
