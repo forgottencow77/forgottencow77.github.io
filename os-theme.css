@@ -1,0 +1,214 @@
+/* Windows風OSテーマのCSS */
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('windows.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: "MS PGothic", "MS Gothic", "Osaka", sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+/* OS全体のレイアウト */
+.os-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* デスクトップ領域 */
+.desktop {
+    flex-grow: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+/* タスクバー */
+.taskbar {
+    height: 40px;
+    background: linear-gradient(to bottom, #003399, #000066);
+    border-top: 2px solid #6699ff;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    z-index: 1000;
+}
+
+/* スタートボタン */
+.start-button {
+    background: linear-gradient(to bottom, #6699ff, #003399);
+    color: white;
+    border: 1px outset #99ccff;
+    padding: 2px 8px;
+    font-size: 14px;
+    font-weight: bold;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 8px;
+}
+
+.start-button:hover {
+    background: linear-gradient(to bottom, #99ccff, #6699ff);
+}
+
+/* アプリアイコン */
+.app-icons {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.app-icon {
+    width: 32px;
+    height: 32px;
+    background-color: #000033;
+    border: 1px solid #6699ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #ffcc00;
+    font-size: 14px;
+    position: relative;
+}
+
+.app-icon:hover {
+    background-color: #0055aa;
+    border-color: #99ccff;
+}
+
+.app-icon.active {
+    background-color: #0066cc;
+    border-color: #ffffff;
+}
+
+/* アプリウィンドウ */
+.window {
+    position: absolute;
+    background-color: #003366;
+    border: 2px solid #6699ff;
+    border-radius: 3px;
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    width: 800px;
+    height: 80%;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+    z-index: 100;
+    display: none;
+}
+
+.window.active {
+    display: flex;
+}
+
+/* ウィンドウのタイトルバー */
+.window-titlebar {
+    background: linear-gradient(to right, #003399, #000066);
+    height: 25px;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    cursor: move;
+}
+
+.window-title {
+    color: white;
+    font-size: 14px;
+    flex-grow: 1;
+    user-select: none;
+}
+
+.window-controls {
+    display: flex;
+}
+
+.window-button {
+    width: 16px;
+    height: 16px;
+    margin-left: 4px;
+    background-color: #6699ff;
+    border: 1px outset #99ccff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000033;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.window-button:hover {
+    background-color: #99ccff;
+}
+
+.window-content {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 10px;
+    position: relative;
+}
+
+/* 時計 */
+.taskbar-time {
+    margin-left: auto;
+    color: white;
+    font-size: 12px;
+    background-color: #000033;
+    border: 1px inset #6699ff;
+    padding: 2px 5px;
+}
+
+/* アプリのツールチップ */
+.app-tooltip {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    background-color: #ffffcc;
+    color: #000000;
+    font-size: 11px;
+    padding: 2px 5px;
+    border: 1px solid #000000;
+    white-space: nowrap;
+    display: none;
+    z-index: 1001;
+}
+
+.app-icon:hover .app-tooltip {
+    display: block;
+}
+
+/* 元のサイトコンテナ */
+.original-container {
+    width: 100%;
+    height: 100%;
+    border: none;
+    overflow: auto;
+}
+
+iframe.original-container {
+    display: block;
+    background: white;
+}
+
+
+/* スクロールバーをカスタマイズ */
+.window-content::-webkit-scrollbar {
+    width: 16px;
+}
+
+.window-content::-webkit-scrollbar-track {
+    background: #000066;
+    border: 1px solid #6699ff;
+}
+
+.window-content::-webkit-scrollbar-thumb {
+    background: linear-gradient(#6699ff, #003399);
+    border: 1px solid #fff;
+}
