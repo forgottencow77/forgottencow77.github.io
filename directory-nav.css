@@ -1,0 +1,72 @@
+/* Directory-style navigation CSS */
+.dir-navbar {
+    background: #000033;
+    padding: 5px 0;
+    width: 100%;
+    border: 1px solid #6699ff;
+    position: relative;
+    z-index: 3;
+    font-family: monospace;
+}
+
+.dir-navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 5px 10px;
+    width: 100%;
+}
+
+.dir-navbar ul li {
+    margin: 4px 0;
+    position: relative;
+    display: block;
+    line-height: 1.2;
+}
+
+.dir-navbar ul li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: 7px;
+    top: 18px;
+    height: calc(100% - 5px);
+    border-left: 1px dotted #6699ff;
+}
+
+.dir-folder {
+    color: #ffcc00;
+    margin-right: 5px;
+}
+
+.dir-file-indicator {
+    color: #6699ff;
+    margin-right: 3px;
+}
+
+.dir-navbar ul li a {
+    color: #ffff00;
+    text-decoration: none;
+    padding: 2px 3px;
+    display: inline-block;
+    position: relative;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.dir-navbar ul li a:hover {
+    color: #ff71ce;
+    transform: scale(1.03);
+    text-shadow: 0 0 5px #ff71ce;
+}
+
+.dir-navbar ul li a.active {
+    color: #01cdfe;
+    text-shadow: 0 0 5px #01cdfe;
+}
+
+.dir-navbar .folder-path {
+    color: #99ccff;
+    font-size: 12px;
+    border-bottom: 1px dotted #6699ff;
+    padding-bottom: 4px;
+    margin-bottom: 5px;
+}
