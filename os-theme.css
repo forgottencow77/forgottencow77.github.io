@@ -2,13 +2,73 @@
 body {
     margin: 0;
     padding: 0;
-    background-image: url('windows.jpg');
-    background-size: cover;
-    background-attachment: fixed;
-    font-family: "MS PGothic", "MS Gothic", "Osaka", sans-serif;
+    font-family: "MS PGothic", "MS Gothic", "Osaka", monospace;
+    -webkit-font-smoothing: none;
+    font-smooth: never;
     height: 100vh;
     overflow: hidden;
     position: relative;
+}
+
+.os-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-image: url('windows.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+}
+
+.desktop-shortcuts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 40px);
+    z-index: 50;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+    pointer-events: none;
+}
+
+.desktop-shortcuts .shortcut {
+    pointer-events: auto;
+}
+
+.shortcut {
+    width: 80px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.shortcut:hover {
+    transform: scale(1.1);
+}
+
+.shortcut img {
+    width: 48px;
+    height: 48px;
+    border-radius: 5px;
+    border: 1px solid #6699FF;
+}
+
+.shortcut span {
+    color: white;
+    font-size: 12px;
+    text-shadow: 1px 1px 2px #000;
+    word-break: break-word;
+    max-width: 100%;
 }
 
 /* OS全体のレイアウト */
@@ -63,8 +123,8 @@ body {
 }
 
 .app-icon {
-    width: 32px;
-    height: 32px;
+    width: 48px;
+    height: 48px;
     background-color: #000033;
     border: 1px solid #6699ff;
     display: flex;
@@ -74,6 +134,12 @@ body {
     color: #ffcc00;
     font-size: 14px;
     position: relative;
+    margin: 0 4px;
+}
+
+.app-icon img {
+    width: 32px;
+    height: 32px;
 }
 
 .app-icon:hover {
@@ -87,13 +153,22 @@ body {
 }
 
 /* アプリウィンドウ */
+#windows-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 40px);
+    z-index: 100;
+}
+
 .window {
     position: absolute;
     background-color: #003366;
     border: 2px solid #6699ff;
     border-radius: 3px;
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.5);
-    display: flex;
+    display: none;
     flex-direction: column;
     width: 800px;
     height: 80%;
@@ -102,11 +177,11 @@ body {
     transform: translateX(-50%);
     overflow: hidden;
     z-index: 100;
-    display: none;
 }
 
 .window.active {
     display: flex;
+    z-index: 200;
 }
 
 /* ウィンドウのタイトルバー */

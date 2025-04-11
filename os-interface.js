@@ -1,5 +1,4 @@
 // Windows風OSインターフェイス用のJavaScript
-
 document.addEventListener('DOMContentLoaded', function() {
     // タスクバーの時計を更新
     updateClock();
@@ -8,15 +7,38 @@ document.addEventListener('DOMContentLoaded', function() {
     // ウィンドウのドラッグ機能
     setupWindowDragging();
     
-    // アプリアイコンにイベントリスナーを設定
-    setupAppIcons();
+    // デスクトップとタスクバーのクリックイベントを設定
+    setupUIInteractions();
     
     // ウィンドウ制御ボタンの設定
     setupWindowControls();
-    
-    // メインウィンドウを初期表示
-    activateWindow('main-window');
 });
+
+// デスクトップとタスクバーのクリックイベントを設定
+function setupUIInteractions() {
+    // ショートカットとアプリアイコンのクリックイベント
+    document.querySelectorAll('.shortcut, .app-icon').forEach(element => {
+        element.addEventListener('click', function(e) {
+            e.preventDefault();
+            const windowId = this.getAttribute('data-window');
+            const title = this.getAttribute('data-title');
+            const src = this.getAttribute('data-src');
+            createOrShowWindow(windowId, title, src);
+        });
+    });
+
+    // デスクトップのショートカットはダブルクリックでも開く
+    document.querySelectorAll('.shortcut').forEach(shortcut => {
+        shortcut.addEventListener('dblclick', function(e) {
+            e.preventDefault();
+            const windowId = this.getAttribute('data-window');
+            const win = document.querySelector(`#window-${windowId}`);
+            if (win) {
+                toggleMaximize(win);
+            }
+        });
+    });
+}
 
 // 時計を更新する関数
 function updateClock() {
@@ -28,123 +50,180 @@ function updateClock() {
 
 // ウィンドウのドラッグ機能を設定
 function setupWindowDragging() {
-    const windows = document.querySelectorAll('.window');
-    
-    windows.forEach(win => {
-        const titlebar = win.querySelector('.window-titlebar');
-        let isDragging = false;
-        let offsetX, offsetY;
+    document.addEventListener('mousedown', function(e) {
+        const titlebar = e.target.closest('.window-titlebar');
+        if (!titlebar) return;
         
-        titlebar.addEventListener('mousedown', function(e) {
-            isDragging = true;
-            offsetX = e.clientX - win.offsetLeft;
-            offsetY = e.clientY - win.offsetTop;
-            
-            // ウィンドウを前面に
-            activateWindow(win.id);
-        });
+        const win = titlebar.closest('.window');
+        if (!win) return;
         
-        document.addEventListener('mousemove', function(e) {
+        let isDragging = true;
+        const offsetX = e.clientX - win.offsetLeft;
+        const offsetY = e.clientY - win.offsetTop;
+        
+        activateWindow(win);
+        
+        function moveWindow(e) {
             if (isDragging) {
                 win.style.left = (e.clientX - offsetX) + 'px';
                 win.style.top = (e.clientY - offsetY) + 'px';
-                
-                // センタリングを解除
                 win.style.transform = 'none';
             }
+        }
+        
+        function stopDragging() {
+            isDragging = false;
+            document.removeEventListener('mousemove', moveWindow);
+            document.removeEventListener('mouseup', stopDragging);
+        }
+        
+        document.addEventListener('mousemove', moveWindow);
+        document.addEventListener('mouseup', stopDragging);
+    });
+}
+
+// ショートカットの設定
+function setupShortcuts() {
+    const shortcuts = document.querySelectorAll('.desktop-shortcuts .shortcut');
+    shortcuts.forEach(shortcut => {
+        shortcut.addEventListener('click', function() {
+            const windowId = this.getAttribute('data-window');
+            const title = this.getAttribute('data-title');
+            const src = this.getAttribute('data-src');
+            createOrShowWindow(windowId, title, src);
         });
         
-        document.addEventListener('mouseup', function() {
-            isDragging = false;
+        shortcut.addEventListener('dblclick', function() {
+            const windowId = this.getAttribute('data-window');
+            const win = document.querySelector(`#window-${windowId}`);
+            if (win) {
+                toggleMaximize(win);
+            }
         });
     });
 }
 
 // アプリアイコンの設定
 function setupAppIcons() {
-    const appIcons = document.querySelectorAll('.app-icon');
-    
+    const appIcons = document.querySelectorAll('.app-icons .app-icon');
     appIcons.forEach(icon => {
         icon.addEventListener('click', function() {
-            const targetAppId = this.getAttribute('data-target');
-            toggleWindow(targetAppId);
+            const windowId = this.getAttribute('data-window');
+            const title = this.getAttribute('data-title');
+            const src = this.getAttribute('data-src');
+            createOrShowWindow(windowId, title, src);
         });
     });
-}
-
-// ウィンドウ表示切り替え
-function toggleWindow(windowId) {
-    const win = document.getElementById(windowId);
-    
-    if (win.classList.contains('active')) {
-        win.classList.remove('active');
-        document.querySelector(`.app-icon[data-target="${windowId}"]`).classList.remove('active');
-    } else {
-        activateWindow(windowId);
-    }
-}
-
-// ウィンドウをアクティブにする
-function activateWindow(windowId) {
-    // すべてのウィンドウを非アクティブにする
-    document.querySelectorAll('.window').forEach(w => {
-        w.classList.remove('active');
-        w.style.zIndex = '100';
-    });
-    
-    // すべてのアイコンを非アクティブにする
-    document.querySelectorAll('.app-icon').forEach(icon => {
-        icon.classList.remove('active');
-    });
-    
-    // 対象のウィンドウとアイコンをアクティブにする
-    const win = document.getElementById(windowId);
-    win.classList.add('active');
-    win.style.zIndex = '200';
-    document.querySelector(`.app-icon[data-target="${windowId}"]`).classList.add('active');
 }
 
 // ウィンドウ制御ボタンの設定
 function setupWindowControls() {
-    const closeButtons = document.querySelectorAll('.window-close');
-    closeButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const windowId = this.closest('.window').id;
-            toggleWindow(windowId);
-        });
-    });
-    
-    const minimizeButtons = document.querySelectorAll('.window-minimize');
-    minimizeButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const windowId = this.closest('.window').id;
-            toggleWindow(windowId);
-        });
-    });
-
-    const maximizeButtons = document.querySelectorAll('.window-maximize');
-    maximizeButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const window = this.closest('.window');
-            toggleMaximize(window);
-        });
+    document.addEventListener('click', function(e) {
+        const button = e.target.closest('.window-button');
+        if (!button) return;
+        
+        const win = button.closest('.window');
+        if (!win) return;
+        
+        if (button.classList.contains('window-close')) {
+            closeWindow(win);
+        } else if (button.classList.contains('window-maximize')) {
+            toggleMaximize(win);
+        } else if (button.classList.contains('window-minimize')) {
+            minimizeWindow(win);
+        }
     });
 }
 
-function toggleMaximize(window) {
-    if (window.style.width === '100%') {
-        // 元のサイズに戻す
-        window.style.width = '800px';
-        window.style.height = '80%';
-        window.style.top = '10%';
-        window.style.left = '50%';
-        window.style.transform = 'translateX(-50%)';
+// ウィンドウを作成または表示
+function createOrShowWindow(id, title, src) {
+    let win = document.querySelector(`#window-${id}`);
+    
+    if (!win) {
+        const template = document.querySelector('#window-template');
+        win = template.content.cloneNode(true).querySelector('.window');
+        win.id = `window-${id}`;
+        win.querySelector('.window-title').textContent = title;
+        win.querySelector('iframe').src = src;
+        
+        const container = document.querySelector('#windows-container');
+        container.appendChild(win);
+        
+        // 初期位置を設定
+        win.style.left = '50%';
+        win.style.top = '10%';
+        win.style.transform = 'translateX(-50%)';
+    }
+    
+    showWindow(win);
+    activateWindow(win);
+}
+
+// ウィンドウを表示
+function showWindow(win) {
+    win.style.display = 'flex';
+    win.classList.add('active');
+    updateTaskbarIcon(win.id.replace('window-', ''), true);
+}
+
+// ウィンドウを非表示
+function hideWindow(win) {
+    win.style.display = 'none';
+    win.classList.remove('active');
+    updateTaskbarIcon(win.id.replace('window-', ''), false);
+}
+
+// ウィンドウを閉じる
+function closeWindow(win) {
+    hideWindow(win);
+}
+
+// ウィンドウを最小化
+function minimizeWindow(win) {
+    hideWindow(win);
+}
+
+// ウィンドウを最大化/元に戻す
+function toggleMaximize(win) {
+    if (win.style.width === '100%') {
+        win.style.width = '800px';
+        win.style.height = '80%';
+        win.style.top = '10%';
+        win.style.left = '50%';
+        win.style.transform = 'translateX(-50%)';
     } else {
-        // 最大化
-        window.style.width = '100%';
-        window.style.height = '100%';
-        window.style.top = '0';
-        window.style.left = '0';
-        window.style.transform = 'none';
+        win.style.width = '100%';
+        win.style.height = '100%';
+        win.style.top = '0';
+        win.style.left = '0';
+        win.style.transform = 'none';
+    }
+}
+
+// ウィンドウをアクティブにする
+function activateWindow(win) {
+    const windows = document.querySelectorAll('.window');
+    let maxZ = 100;
+    
+    windows.forEach(w => {
+        const zIndex = parseInt(w.style.zIndex) || 100;
+        maxZ = Math.max(maxZ, zIndex);
+        w.classList.remove('active');
+    });
+    
+    win.classList.add('active');
+    win.style.zIndex = (maxZ + 1).toString();
+    updateTaskbarIcon(win.id.replace('window-', ''), true);
+}
+
+// タスクバーアイコンの状態を更新
+function updateTaskbarIcon(windowId, isActive) {
+    const icon = document.querySelector(`.app-icon[data-window="${windowId}"]`);
+    if (icon) {
+        if (isActive) {
+            icon.classList.add('active');
+        } else {
+            icon.classList.remove('active');
+        }
     }
 }

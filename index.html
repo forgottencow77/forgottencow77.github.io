@@ -5,37 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>てんかうOS</title>
     <link rel="stylesheet" type="text/css" href="os-theme.css">
+    <link rel="stylesheet" type="text/css" href="crt-effect.css">
+    <script src="crt-effect.js"></script>
+    <base target="_blank">
 </head>
 <body>
-    <div class="os-container">
+    <div class="desktop-shortcuts">
+        <a class="shortcut" data-window="browser" data-title="インターネット" data-src="main-content.html">
+            <img src="browser.png" alt="インターネット" width="32" height="32">
+            <span>インターネット</span>
+        </a>
+        <a class="shortcut" data-window="explorer" data-title="エクスプローラー" data-src="directory.html">
+            <img src="folder.png" alt="エクスプローラー" width="32" height="32">
+            <span>エクスプローラー</span>
+        </a>
+    </div>
+    <div id="os-background" class="os-container">
         <div class="desktop">
-            <!-- メインウィンドウ -->
-            <div id="main-window" class="window">
-                <div class="window-titlebar">
-                    <div class="window-title">てんかうの部屋</div>
-                    <div class="window-controls">
-                        <button class="window-button window-minimize">_</button>
-                        <button class="window-button window-maximize">□</button>
-                        <button class="window-button window-close">×</button>
+            <!-- アプリケーションウィンドウ用のコンテナ -->
+            <div id="windows-container"></div>
+
+            <!-- ウィンドウのテンプレート -->
+            <template id="window-template">
+                <div class="window">
+                    <div class="window-titlebar">
+                        <div class="window-title"></div>
+                        <div class="window-controls">
+                            <button class="window-button window-minimize">_</button>
+                            <button class="window-button window-maximize">□</button>
+                            <button class="window-button window-close">×</button>
+                        </div>
+                    </div>
+                    <div class="window-content">
+                        <iframe frameborder="0" class="original-container"></iframe>
                     </div>
                 </div>
-                <div class="window-content">
-                    <iframe src="main-content.html" frameborder="0" class="original-container"></iframe>
-                </div>
-            </div>
-
-            <!-- 他のウィンドウをここに追加 -->
+            </template>
         </div>
 
         <!-- タスクバー -->
         <div class="taskbar">
             <button class="start-button">スタート</button>
             <div class="app-icons">
-                <div class="app-icon" data-target="main-window">
-                    HP
-                    <div class="app-tooltip">てんかうの部屋</div>
-                </div>
-                <!-- 他のアプリアイコンをここに追加 -->
+                <a class="app-icon" data-window="browser" data-title="インターネット" data-src="main-content.html">
+                    <img src="browser.png" alt="インターネット" width="32" height="32">
+                    <div class="app-tooltip">インターネット</div>
+                </a>
+                <a class="app-icon" data-window="explorer" data-title="エクスプローラー" data-src="directory.html">
+                    <img src="folder.png" alt="エクスプローラー" width="32" height="32">
+                    <div class="app-tooltip">エクスプローラー</div>
+                </a>
             </div>
             <div class="taskbar-time">00:00</div>
         </div>

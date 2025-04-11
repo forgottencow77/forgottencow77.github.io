@@ -42,24 +42,29 @@ document.addEventListener('DOMContentLoaded', function() {
   document.body.appendChild(crtOverlay);
   
   // ウェブサイトのコンテンツを一時的に非表示にする
-  document.querySelector('.container').style.opacity = '0';
+  document.querySelector('.os-container').style.opacity = '0';
   
   // システムログのテキストを表示
   const systemLogText = [
-    "TENKAUU-OS v1.77.88 BOOTING...",
+    "┌───────────────────────────────────────────┐",
+    "│  ██╗    ██╗███████╗███████╗              │",
+    "│  ██║    ██║██╔════╝██╔════╝              │",
+    "│  ██║ █╗ ██║███████╗███████╗              │",
+    "│  ██║███╗██║╚════██║╚════██║              │",
+    "│  ╚███╔███╔╝███████║███████║              │",
+    "│   ╚══╝╚══╝ ╚══════╝╚══════╝              │",
+    "│                                           │",
+    "│         World Simulator System            │",
+    "│               v2.01                       │",
+    "└───────────────────────────────────────────┘",
+    "",
     "INITIALIZING SYSTEM COMPONENTS...",
     "CHECKING MEMORY ALLOCATION... OK",
     "LOADING KERNEL... DONE",
-    "INITIALIZING GRAPHICS SUBSYSTEM...",
-    "VAPORWAVE AESTHETICS MODULE LOADED",
-    "LOADING USER PREFERENCES... OK",
-    "MOUNTING CAT GIF REPOSITORY... COMPLETE",
-    "ANALYZING INTERNET CONNECTION... CONNECTED TO CYBER REALM",
-    "SEARCHING FOR VISITORS... FOUND",
+    "INITIALIZING MACHINE LEARNING MODULES...",
+    "LOADING TENSORFLOW MODELS... DONE",
+    "COMPILING PYTORCH KERNELS... COMPLETE",
     "VISITOR #" + (localStorage.getItem('accessCount') || '???') + " DETECTED",
-    "APPLYING NOSTALGIC FILTER... DONE",
-    "PREPARING DIMENSIONAL PORTAL...",
-    "INJECTING ＡＥＳＴＨＥＴＩＣｓ...",
     "WELCOME TO てんかう SPACE // INITIALIZATION COMPLETE"
   ];
   
@@ -69,12 +74,30 @@ document.addEventListener('DOMContentLoaded', function() {
   function typeNextLogLine() {
     if (logIndex < systemLogText.length) {
       const line = document.createElement('div');
-      line.textContent = '> ' + systemLogText[logIndex];
-      systemLogElement.appendChild(line);
-      logIndex++;
-      
-      // テキスト表示のランダム遅延
-      setTimeout(typeNextLogLine, 100 + Math.random() * 300);
+      if (logIndex < 11) {
+        line.className = 'aa';
+        line.textContent = systemLogText[logIndex];
+        systemLogElement.appendChild(line);
+        logIndex++;
+        setTimeout(typeNextLogLine, 50);  // AAは高速表示
+      } else {
+        // AAの表示が完了してから少し待ってからログを表示開始
+        if (logIndex === 11) {
+          setTimeout(() => {
+            line.className = 'log';
+            line.textContent = '> ' + systemLogText[logIndex];
+            systemLogElement.appendChild(line);
+            logIndex++;
+            setTimeout(typeNextLogLine, 100 + Math.random() * 300);
+          }, 1000);  // 1秒待ってからログ表示開始
+        } else {
+          line.className = 'log';
+          line.textContent = '> ' + systemLogText[logIndex];
+          systemLogElement.appendChild(line);
+          logIndex++;
+          setTimeout(typeNextLogLine, 100 + Math.random() * 300);
+        }
+      }
     }
   }
   
@@ -205,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function() {
               }
               
               // ウェブサイトのコンテンツを表示（シャットダウンアニメーションと同時）
-              document.querySelector('.container').style.opacity = '1';
+              document.querySelector('.os-container').style.opacity = '1';
               
               // CRTシャットダウンアニメーション終了後にオーバーレイを完全に非表示
               setTimeout(() => {
