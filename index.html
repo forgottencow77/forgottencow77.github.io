@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>てんかうOS</title>
+    <title>てんかうOS - 1990年代地雷系オペレーティングシステム</title>
     <link rel="stylesheet" type="text/css" href="os-theme.css">
     <link rel="stylesheet" type="text/css" href="crt-effect.css">
-    <script src="crt-effect.js"></script>
+    <script src="crt-effect.js" defer></script>
+    <script src="vaporwave.js" defer></script>
     <base target="_blank">
 </head>
 <body>
+    <!-- レトロスキャンライン効果 -->
+    <div class="retro-scanlines"></div>
+    
+    <!-- デスクトップショートカット -->
     <div class="desktop-shortcuts">
         <a class="shortcut" data-window="browser" data-title="インターネット" data-src="main-content.html">
             <img src="browser.png" alt="インターネット" width="32" height="32">
@@ -19,7 +24,28 @@
             <img src="folder.png" alt="エクスプローラー" width="32" height="32">
             <span>エクスプローラー</span>
         </a>
+        <a class="shortcut" data-window="profile" data-title="プロフィール" data-src="profile.html">
+            <img src="icon.jpg" alt="プロフィール" width="32" height="32">
+            <span>プロフィール</span>
+        </a>
+        <a class="shortcut" data-window="oekaki" data-title="お絵描き掲示板" data-src="oekaki.html">
+            <img src="star2.gif" alt="お絵描き" width="32" height="32">
+            <span>お絵描き掲示板</span>
+        </a>
+        <a class="shortcut" data-window="diary" data-title="日記帳" data-src="diary.html">
+            <img src="cat-dance.gif" alt="日記" width="32" height="32">
+            <span>日記帳</span>
+        </a>
+        <a class="shortcut" data-window="hobby" data-title="趣味部屋" data-src="hobby.html">
+            <img src="duck-dance.gif" alt="趣味" width="32" height="32">
+            <span>趣味部屋</span>
+        </a>
+        <a class="shortcut" data-window="links" data-title="リンク集" data-src="links.html">
+            <img src="star.gif" alt="リンク集" width="32" height="32">
+            <span>リンク集</span>
+        </a>
     </div>
+
     <div id="os-background" class="os-container">
         <div class="desktop">
             <!-- アプリケーションウィンドウ用のコンテナ -->
@@ -45,7 +71,7 @@
 
         <!-- タスクバー -->
         <div class="taskbar">
-            <button class="start-button">スタート</button>
+            <button class="start-button">🏠 スタート</button>
             <div class="app-icons">
                 <a class="app-icon" data-window="browser" data-title="インターネット" data-src="main-content.html">
                     <img src="browser.png" alt="インターネット" width="32" height="32">
@@ -55,11 +81,125 @@
                     <img src="folder.png" alt="エクスプローラー" width="32" height="32">
                     <div class="app-tooltip">エクスプローラー</div>
                 </a>
+                <a class="app-icon" data-window="profile" data-title="プロフィール" data-src="profile.html">
+                    <img src="icon.jpg" alt="プロフィール" width="32" height="32">
+                    <div class="app-tooltip">プロフィール</div>
+                </a>
+                <a class="app-icon" data-window="diary" data-title="日記帳" data-src="diary.html">
+                    <img src="cat-dance.gif" alt="日記" width="32" height="32">
+                    <div class="app-tooltip">日記帳</div>
+                </a>
+                <a class="app-icon" data-window="hobby" data-title="趣味部屋" data-src="hobby.html">
+                    <img src="duck-dance.gif" alt="趣味" width="32" height="32">
+                    <div class="app-tooltip">趣味部屋</div>
+                </a>
+                <a class="app-icon" data-window="links" data-title="リンク集" data-src="links.html">
+                    <img src="star.gif" alt="リンク集" width="32" height="32">
+                    <div class="app-tooltip">リンク集</div>
+                </a>
+                <a class="app-icon" data-window="oekaki" data-title="お絵描き掲示板" data-src="oekaki.html">
+                    <img src="star2.gif" alt="お絵描き" width="32" height="32">
+                    <div class="app-tooltip">お絵描き掲示板</div>
+                </a>
             </div>
             <div class="taskbar-time">00:00</div>
         </div>
     </div>
 
     <script src="os-interface.js"></script>
+
+    <script>
+        // 追加のエフェクト
+        document.addEventListener('DOMContentLoaded', function() {
+            // 時々グリッチエフェクトを発生させる
+            setInterval(() => {
+                if (Math.random() < 0.01) { // 1%の確率で
+                    document.body.style.filter = 'hue-rotate(' + (Math.random() * 360) + 'deg) saturate(2)';
+                    setTimeout(() => {
+                        document.body.style.filter = '';
+                    }, 100);
+                }
+            }, 1000);
+
+            // ネオンカーソルの軌跡エフェクト
+            let trail = [];
+            document.addEventListener('mousemove', function(e) {
+                if (Math.random() > 0.9) { // 10%の確率でトレイル作成
+                    const trailElement = document.createElement('div');
+                    trailElement.style.cssText = `
+                        position: fixed;
+                        width: 4px;
+                        height: 4px;
+                        background: radial-gradient(circle, #ff00ff, transparent);
+                        border-radius: 50%;
+                        pointer-events: none;
+                        z-index: 9997;
+                        left: ${e.clientX}px;
+                        top: ${e.clientY}px;
+                        opacity: 1;
+                        transition: opacity 0.5s ease-out;
+                    `;
+                    document.body.appendChild(trailElement);
+                    
+                    setTimeout(() => {
+                        trailElement.style.opacity = '0';
+                        setTimeout(() => {
+                            if (trailElement.parentNode) {
+                                trailElement.parentNode.removeChild(trailElement);
+                            }
+                        }, 500);
+                    }, 100);
+                }
+            });
+
+            // 起動時の歓迎メッセージ
+            setTimeout(() => {
+                const welcomeMsg = document.createElement('div');
+                welcomeMsg.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: linear-gradient(135deg, rgba(0,0,51,0.95), rgba(102,0,204,0.95));
+                    color: #00ffff;
+                    padding: 20px;
+                    border: 2px solid #ff00ff;
+                    border-radius: 10px;
+                    text-align: center;
+                    z-index: 5000;
+                    box-shadow: 0 0 30px rgba(255,0,255,0.5);
+                    backdrop-filter: blur(10px);
+                    animation: pulse 2s ease-in-out infinite;
+                `;
+                welcomeMsg.innerHTML = `
+                    <h2 style="margin: 0 0 10px 0; text-shadow: 0 0 15px #00ffff;">
+                        ★ てんかうOS へようこそ ★
+                    </h2>
+                    <p style="margin: 0; font-size: 14px;">
+                        1990年代風地雷系オペレーティングシステム
+                    </p>
+                `;
+                document.body.appendChild(welcomeMsg);
+
+                // 3秒後に自動で消す
+                setTimeout(() => {
+                    welcomeMsg.style.opacity = '0';
+                    welcomeMsg.style.transform = 'translate(-50%, -50%) scale(0.8)';
+                    setTimeout(() => {
+                        if (welcomeMsg.parentNode) {
+                            welcomeMsg.parentNode.removeChild(welcomeMsg);
+                        }
+                    }, 500);
+                }, 3000);
+            }, 2000);
+        });
+    </script>
+
+    <style>
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 30px rgba(255,0,255,0.5); }
+            50% { box-shadow: 0 0 50px rgba(0,255,255,0.8); }
+        }
+    </style>
 </body>
 </html>

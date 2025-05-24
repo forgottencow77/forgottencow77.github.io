@@ -8,6 +8,38 @@ body {
     height: 100vh;
     overflow: hidden;
     position: relative;
+    cursor: url('star2.gif'), auto !important; /* 地雷系カーソル復活 */
+}
+
+/* 地雷系カーソルエフェクト */
+body * {
+    cursor: inherit;
+}
+
+a, button, .shortcut, .app-icon, .start-button, .window-button {
+    cursor: url('star.gif'), pointer !important;
+}
+
+.window-titlebar {
+    cursor: url('cat-dance.gif'), move !important;
+}
+
+/* ネオン効果を追加 */
+@keyframes neon-glow {
+    0%, 100% { 
+        box-shadow: 
+            0 0 5px #ff00ff,
+            0 0 10px #ff00ff,
+            0 0 15px #ff00ff,
+            inset 0 0 5px #ff00ff;
+    }
+    50% { 
+        box-shadow: 
+            0 0 10px #00ffff,
+            0 0 20px #00ffff,
+            0 0 30px #00ffff,
+            inset 0 0 10px #00ffff;
+    }
 }
 
 .os-container {
@@ -19,6 +51,16 @@ body {
     background-size: cover;
     background-attachment: fixed;
     position: relative;
+    animation: subtle-glitch 10s infinite;
+}
+
+/* 微細なグリッチエフェクト */
+@keyframes subtle-glitch {
+    0%, 95%, 100% { filter: none; }
+    96% { filter: hue-rotate(90deg) saturate(1.5); }
+    97% { filter: hue-rotate(180deg) saturate(2); }
+    98% { filter: hue-rotate(270deg) saturate(1.5); }
+    99% { filter: none; }
 }
 
 .desktop-shortcuts {
@@ -44,31 +86,61 @@ body {
 .shortcut {
     width: 80px;
     text-align: center;
-    cursor: pointer;
-    transition: transform 0.2s;
+    cursor: url('star.gif'), pointer !important;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 5px;
+    position: relative;
 }
 
 .shortcut:hover {
-    transform: scale(1.1);
+    transform: scale(1.1) rotate(2deg);
+    filter: drop-shadow(0 0 10px #ff00ff);
+}
+
+.shortcut:active {
+    transform: scale(0.95) rotate(-2deg);
+    filter: drop-shadow(0 0 15px #00ffff);
 }
 
 .shortcut img {
     width: 48px;
     height: 48px;
     border-radius: 5px;
-    border: 1px solid #6699FF;
+    border: 2px solid #6699FF;
+    transition: all 0.3s ease;
+}
+
+.shortcut:hover img {
+    border-color: #ff00ff;
+    animation: icon-pulse 0.5s ease-in-out;
+}
+
+@keyframes icon-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
 }
 
 .shortcut span {
     color: white;
     font-size: 12px;
-    text-shadow: 1px 1px 2px #000;
+    text-shadow: 
+        1px 1px 2px #000,
+        0 0 10px #ff00ff,
+        0 0 20px #ff00ff;
     word-break: break-word;
     max-width: 100%;
+    transition: all 0.3s ease;
+}
+
+.shortcut:hover span {
+    color: #ff00ff;
+    text-shadow: 
+        1px 1px 2px #000,
+        0 0 15px #ff00ff,
+        0 0 25px #ff00ff;
 }
 
 /* OS全体のレイアウト */
@@ -83,39 +155,63 @@ body {
     flex-grow: 1;
     position: relative;
     overflow: hidden;
+    background: radial-gradient(ellipse at center, rgba(255,0,255,0.1) 0%, transparent 70%);
 }
 
-/* タスクバー */
+/* タスクバー - 地雷系強化 */
 .taskbar {
     height: 40px;
-    background: linear-gradient(to bottom, #003399, #000066);
-    border-top: 2px solid #6699ff;
+    background: linear-gradient(to bottom, 
+        rgba(0,51,153,0.9), 
+        rgba(0,0,102,0.9));
+    border-top: 3px solid #6699ff;
     display: flex;
     align-items: center;
     padding: 0 10px;
     z-index: 1000;
+    box-shadow: 
+        0 -2px 10px rgba(102,153,255,0.5),
+        inset 0 1px 0 rgba(255,255,255,0.2);
+    backdrop-filter: blur(5px);
 }
 
-/* スタートボタン */
+/* スタートボタン - ネオン効果 */
 .start-button {
-    background: linear-gradient(to bottom, #6699ff, #003399);
+    background: linear-gradient(45deg, #6699ff, #003399, #ff00ff);
+    background-size: 200% 200%;
     color: white;
-    border: 1px outset #99ccff;
+    border: 2px outset #99ccff;
     padding: 2px 8px;
     font-size: 14px;
     font-weight: bold;
     height: 30px;
     display: flex;
     align-items: center;
-    cursor: pointer;
+    cursor: url('star.gif'), pointer !important;
     margin-right: 8px;
+    animation: gradient-shift 3s ease infinite;
+    transition: all 0.3s ease;
+}
+
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .start-button:hover {
-    background: linear-gradient(to bottom, #99ccff, #6699ff);
+    background: linear-gradient(45deg, #99ccff, #6699ff, #00ffff);
+    background-size: 200% 200%;
+    animation: gradient-shift 1s ease infinite;
+    box-shadow: 0 0 15px #00ffff;
 }
 
-/* アプリアイコン */
+.start-button:active {
+    transform: scale(0.95);
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+}
+
+/* アプリアイコン - 地雷系アニメーション */
 .app-icons {
     display: flex;
     align-items: center;
@@ -125,34 +221,81 @@ body {
 .app-icon {
     width: 48px;
     height: 48px;
-    background-color: #000033;
-    border: 1px solid #6699ff;
+    background: linear-gradient(135deg, #000033, #330066);
+    border: 2px solid #6699ff;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
+    cursor: url('star.gif'), pointer !important;
     color: #ffcc00;
     font-size: 14px;
     position: relative;
     margin: 0 4px;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    overflow: hidden;
+}
+
+.app-icon::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, 
+        transparent, 
+        rgba(255,0,255,0.3), 
+        transparent);
+    transform: rotate(45deg);
+    transition: all 0.6s ease;
+    opacity: 0;
+}
+
+.app-icon:hover::before {
+    animation: shine-effect 0.8s ease-out;
+}
+
+@keyframes shine-effect {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
 }
 
 .app-icon img {
     width: 32px;
     height: 32px;
+    transition: all 0.3s ease;
 }
 
 .app-icon:hover {
-    background-color: #0055aa;
+    background: linear-gradient(135deg, #0055aa, #6600ff);
     border-color: #99ccff;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 
+        0 5px 15px rgba(0,255,255,0.3),
+        0 0 20px rgba(255,0,255,0.4);
+}
+
+.app-icon:hover img {
+    transform: scale(1.1) rotate(5deg);
+    filter: drop-shadow(0 0 5px #00ffff);
 }
 
 .app-icon.active {
-    background-color: #0066cc;
+    background: linear-gradient(135deg, #0066cc, #ff0066);
     border-color: #ffffff;
+    box-shadow: 
+        0 0 15px rgba(255,255,255,0.5),
+        inset 0 0 10px rgba(255,0,255,0.3);
+    animation: active-pulse 2s ease-in-out infinite;
 }
 
-/* アプリウィンドウ */
+@keyframes active-pulse {
+    0%, 100% { box-shadow: 0 0 15px rgba(255,255,255,0.5); }
+    50% { box-shadow: 0 0 25px rgba(255,0,255,0.8); }
+}
+
+/* アプリウィンドウ - 大幅強化 */
 #windows-container {
     position: absolute;
     top: 0;
@@ -164,126 +307,554 @@ body {
 
 .window {
     position: absolute;
-    background-color: #003366;
-    border: 2px solid #6699ff;
-    border-radius: 3px;
-    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(135deg, 
+        rgba(192,192,192,0.95), 
+        rgba(192,192,192,0.9));
+    border: 3px ridge #c0c0c0;
+    border-radius: 8px;
+    box-shadow: 
+        0 8px 32px rgba(0,0,0,0.4),
+        0 0 0 1px rgba(255,255,255,0.1),
+        inset 0 1px 0 rgba(255,255,255,0.3);
     display: none;
     flex-direction: column;
     width: 800px;
-    height: 80%;
+    height: 600px;
     top: 10%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) scale(0.5);
     overflow: hidden;
     z-index: 100;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    backdrop-filter: blur(10px);
 }
 
 .window.active {
     display: flex;
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
     z-index: 200;
+    box-shadow: 
+        0 12px 40px rgba(0,0,0,0.6),
+        0 0 0 1px rgba(255,255,255,0.2),
+        0 0 30px rgba(255,0,255,0.3),
+        inset 0 1px 0 rgba(255,255,255,0.4);
 }
 
-/* ウィンドウのタイトルバー */
+.window.appearing {
+    animation: window-enter 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes window-enter {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.3) rotate(15deg);
+        filter: blur(10px);
+    }
+    50% {
+        opacity: 0.7;
+        transform: translateX(-50%) scale(1.1) rotate(-5deg);
+        filter: blur(2px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1) rotate(0deg);
+        filter: blur(0px);
+    }
+}
+
+.window.minimizing {
+    animation: window-minimize 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes window-minimize {
+    0% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.1) rotate(180deg);
+        filter: blur(10px);
+    }
+}
+
+.window.maximizing {
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.window.dragging {
+    transition: none !important;
+    cursor: url('cat-dance.gif'), move !important;
+    transform: translateX(-50%) scale(1.02) rotate(2deg);
+    box-shadow: 
+        0 15px 50px rgba(0,0,0,0.7),
+        0 0 40px rgba(255,0,255,0.5);
+}
+
+/* ウィンドウタイトルバー - 地雷系強化 */
 .window-titlebar {
-    background: linear-gradient(to right, #003399, #000066);
-    height: 25px;
+    background: linear-gradient(90deg, 
+        #000033, 
+        #003366, 
+        #0066cc, 
+        #003366, 
+        #000033);
+    background-size: 200% 100%;
+    color: #ffffff;
+    padding: 8px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    padding: 0 8px;
-    cursor: move;
+    cursor: url('cat-dance.gif'), move !important;
+    user-select: none;
+    border-bottom: 2px solid rgba(255,255,255,0.2);
+    position: relative;
+    animation: titlebar-gradient 4s linear infinite;
+}
+
+@keyframes titlebar-gradient {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+}
+
+.window-titlebar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255,255,255,0.5), 
+        transparent);
+}
+
+.window-titlebar:hover {
+    background: linear-gradient(90deg, 
+        #000066, 
+        #0066cc, 
+        #00ccff, 
+        #0066cc, 
+        #000066);
+    background-size: 200% 100%;
+    animation: titlebar-gradient 2s linear infinite;
+}
+
+.window-titlebar.dragging {
+    background: linear-gradient(90deg, 
+        #660066, 
+        #cc00cc, 
+        #ff00ff, 
+        #cc00cc, 
+        #660066);
+    background-size: 200% 100%;
+    animation: titlebar-gradient 1s linear infinite;
+    cursor: url('cat-dance.gif'), move !important;
 }
 
 .window-title {
-    color: white;
+    font-weight: bold;
     font-size: 14px;
     flex-grow: 1;
-    user-select: none;
+    text-shadow: 
+        1px 1px 2px rgba(0,0,0,0.8),
+        0 0 10px rgba(255,255,255,0.3);
+    animation: title-glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes title-glow {
+    0% { text-shadow: 1px 1px 2px rgba(0,0,0,0.8), 0 0 10px rgba(255,255,255,0.3); }
+    100% { text-shadow: 1px 1px 2px rgba(0,0,0,0.8), 0 0 15px rgba(0,255,255,0.5); }
 }
 
 .window-controls {
     display: flex;
+    gap: 2px;
 }
 
 .window-button {
-    width: 16px;
-    height: 16px;
-    margin-left: 4px;
-    background-color: #6699ff;
-    border: 1px outset #99ccff;
+    width: 24px;
+    height: 20px;
+    background: linear-gradient(to bottom, #c0c0c0, #808080);
+    border: 1px outset #c0c0c0;
+    color: #000;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: url('star.gif'), pointer !important;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #000033;
-    font-size: 10px;
-    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.window-button::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+    transform: scale(0);
+    transition: transform 0.3s ease;
+}
+
+.window-button:hover::before {
+    transform: scale(1);
 }
 
 .window-button:hover {
-    background-color: #99ccff;
+    background: linear-gradient(to bottom, #e0e0e0, #a0a0a0);
+    border-color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
-.window-content {
-    flex-grow: 1;
-    overflow-y: auto;
-    padding: 10px;
-    position: relative;
+.window-button:active {
+    background: linear-gradient(to bottom, #808080, #c0c0c0);
+    border: 1px inset #c0c0c0;
+    transform: translateY(1px);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
 }
 
-/* 時計 */
+/* 最大化状態のウィンドウ */
+.window[data-maximized="true"] {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+/* 時計表示 - ネオン効果 */
 .taskbar-time {
+    color: #00ffff;
+    font-family: "MS Gothic", monospace;
+    font-size: 14px;
+    font-weight: bold;
     margin-left: auto;
-    color: white;
-    font-size: 12px;
-    background-color: #000033;
-    border: 1px inset #6699ff;
-    padding: 2px 5px;
+    padding: 5px 10px;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(0,255,255,0.5);
+    border-radius: 3px;
+    text-shadow: 
+        0 0 5px #00ffff,
+        0 0 10px #00ffff;
+    animation: clock-pulse 2s ease-in-out infinite alternate;
 }
 
-/* アプリのツールチップ */
+@keyframes clock-pulse {
+    0% { 
+        text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
+        border-color: rgba(0,255,255,0.5);
+    }
+    100% { 
+        text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff;
+        border-color: rgba(0,255,255,1);
+    }
+}
+
+/* アプリツールチップ */
 .app-tooltip {
     position: absolute;
-    bottom: 40px;
-    left: 0;
-    background-color: #ffffcc;
-    color: #000000;
-    font-size: 11px;
-    padding: 2px 5px;
-    border: 1px solid #000000;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.9);
+    color: #00ffff;
+    padding: 5px 8px;
+    border-radius: 4px;
+    font-size: 12px;
     white-space: nowrap;
-    display: none;
-    z-index: 1001;
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    border: 1px solid #00ffff;
+    box-shadow: 0 0 10px rgba(0,255,255,0.5);
 }
 
 .app-icon:hover .app-tooltip {
-    display: block;
+    opacity: 1;
+    transform: translateX(-50%) translateY(-5px);
 }
 
-/* 元のサイトコンテナ */
+/* ウィンドウコンテンツ */
 .original-container {
     width: 100%;
     height: 100%;
     border: none;
-    overflow: auto;
+    background: #ffffff;
 }
 
 iframe.original-container {
-    display: block;
-    background: white;
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: #ffffff;
 }
 
-
-/* スクロールバーをカスタマイズ */
+/* ウィンドウ内スクロールバーのカスタマイズ */
 .window-content::-webkit-scrollbar {
     width: 16px;
 }
 
 .window-content::-webkit-scrollbar-track {
-    background: #000066;
-    border: 1px solid #6699ff;
+    background: #c0c0c0;
+    border: 1px inset #c0c0c0;
 }
 
 .window-content::-webkit-scrollbar-thumb {
-    background: linear-gradient(#6699ff, #003399);
-    border: 1px solid #fff;
+    background: linear-gradient(to bottom, #e0e0e0, #a0a0a0);
+    border: 1px outset #c0c0c0;
+}
+
+.window-content::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, #f0f0f0, #b0b0b0);
+}
+
+/* スタートメニュー - 地雷系デザイン */
+.start-menu {
+    position: fixed;
+    bottom: 45px;
+    left: 10px;
+    width: 250px;
+    background: linear-gradient(135deg, 
+        rgba(0,0,51,0.95), 
+        rgba(0,51,102,0.95));
+    border: 2px ridge #6699ff;
+    border-radius: 8px;
+    box-shadow: 
+        0 8px 32px rgba(0,0,0,0.6),
+        0 0 20px rgba(102,153,255,0.4),
+        inset 0 1px 0 rgba(255,255,255,0.2);
+    z-index: 2000;
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+}
+
+.start-menu::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at top left, 
+        rgba(255,0,255,0.1) 0%, 
+        transparent 50%);
+    pointer-events: none;
+}
+
+.start-menu-header {
+    background: linear-gradient(90deg, 
+        #000066, 
+        #003399, 
+        #000066);
+    padding: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.start-user-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    border: 1px solid #6699ff;
+}
+
+.start-user-name {
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: 
+        1px 1px 2px rgba(0,0,0,0.8),
+        0 0 10px rgba(255,255,255,0.3);
+}
+
+.start-menu-apps {
+    padding: 5px;
+}
+
+.start-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    color: #ffffff;
+    cursor: url('star.gif'), pointer !important;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.start-menu-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255,0,255,0.3), 
+        transparent);
+    transition: left 0.3s ease;
+}
+
+.start-menu-item:hover::before {
+    left: 100%;
+}
+
+.start-menu-item:hover {
+    background: linear-gradient(90deg, 
+        rgba(0,102,204,0.6), 
+        rgba(255,0,255,0.4));
+    color: #00ffff;
+    transform: translateX(5px);
+    text-shadow: 0 0 10px #00ffff;
+}
+
+.start-menu-item img {
+    width: 24px;
+    height: 24px;
+}
+
+.start-menu-footer {
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding: 5px;
+}
+
+.start-menu-item.shutdown {
+    color: #ff6666;
+    font-weight: bold;
+}
+
+.start-menu-item.shutdown:hover {
+    background: linear-gradient(90deg, 
+        rgba(204,0,0,0.6), 
+        rgba(255,102,102,0.4));
+    color: #ffffff;
+}
+
+/* シャットダウンオーバーレイ */
+.shutdown-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: shutdown-fade-in 0.5s ease-out;
+}
+
+.shutdown-dialog {
+    background: linear-gradient(135deg, #003366, #000033);
+    border: 3px ridge #6699ff;
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    color: #ffffff;
+    box-shadow: 0 0 50px rgba(102,153,255,0.6);
+}
+
+.shutdown-dialog h2 {
+    margin: 0 0 20px 0;
+    color: #00ffff;
+    text-shadow: 0 0 15px #00ffff;
+}
+
+.shutdown-progress {
+    width: 300px;
+    height: 20px;
+    background: #000033;
+    border: 2px inset #6699ff;
+    border-radius: 10px;
+    margin: 20px 0;
+    overflow: hidden;
+}
+
+.shutdown-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #0066cc, #00ccff);
+    width: 0;
+    animation: shutdown-progress 3s ease-out forwards;
+}
+
+@keyframes shutdown-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes shutdown-progress {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+/* レトロエフェクト用の追加スタイル */
+.retro-scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        transparent 50%, 
+        rgba(0, 255, 0, 0.03) 50%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+/* パフォーマンス最適化 */
+* {
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+/* セレクション時のエフェクト */
+::selection {
+    background: rgba(255,0,255,0.3);
+    color: #00ffff;
+}
+
+::-moz-selection {
+    background: rgba(255,0,255,0.3);
+    color: #00ffff;
+}
+
+/* フォーカス時のエフェクト */
+button:focus, .shortcut:focus, .app-icon:focus, .start-button:focus, .window-button:focus {
+    outline: 2px solid #00ffff;
+    outline-offset: 2px;
+    box-shadow: 0 0 15px rgba(0,255,255,0.5);
+}
+
+/* マウスダウン時のエフェクト */
+.window-titlebar:active {
+    cursor: url('cat-dance.gif'), move !important;
+}
+
+.window-titlebar.dragging * {
+    cursor: url('cat-dance.gif'), move !important;
+    pointer-events: none;
+}
+
+/* ウィンドウコンテンツの改善 */
+.window-content {
+    flex: 1;
+    overflow: auto;
+    background: #ffffff;
+    position: relative;
 }

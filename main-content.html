@@ -3,152 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="HeTeMuLu Creator Ver.1.20β2">
+    <title>★☆てんかうの地雷系ホームページ☆★</title>
+    <link rel="stylesheet" type="text/css" href="retro90s.css">
     <base target="_self">
-    <script>
-        // Prevent accessing index.html directly from iframes
-        if (window !== window.top) {
-            // We are in an iframe
-            window.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    e.preventDefault();
-                    const href = e.target.getAttribute('href');
-                    if (href && !href.startsWith('#')) {
-                        window.location.href = href;
-                    }
-                }
-            }, true);
-        }
-    </script>
-    <link rel="stylesheet" type="text/css" href="css.css">
-    <title class="floating-title">「てんかうの知らない異世界」毎週土曜5時</title>
-    <script src="vaporwave.js" defer></script>
 </head>
 <body>
-    <div class="container">
-        <header class="header">            <div class="header-content">
-                <h1 class="site-title">★☆★ てんかうの部屋 ★☆★</h1>
-                <p class="subtitle">〜自分の好きなことを綴るだけのページです〜</p>
-                <img src="star.gif" alt="キラキラ" class="decoration">
-            </div><div class="marquee-text">
-                <span>★★★ ようこそ！てんかうのホームページへ！このサイトは工事中です。最終更新日：2005年4月10日 ★★★</span>
+    <!-- ヘッダー -->
+    <div class="header-90s">
+        <h1 class="title-90s retro-3d">
+            <img src="star.gif" class="gif-decoration">
+            ★☆てんかうの地雷系ホームページ☆★
+            <img src="star.gif" class="gif-decoration">
+        </h1>
+        <div class="marquee-90s">
+            <span>★★★ ようこそ！地雷系の世界へ！1990年代風ウェブサイトです！工事中多め！★★★</span>
+        </div>
+    </div>
+
+    <!-- カウンター -->
+    <div class="counter-90s">
+        <img src="1.gif" class="gif-decoration">
+        <span class="glow-text">あなたは</span>
+        <span id="visitor-count" class="big-text rainbow-text">???</span>
+        <span class="glow-text">番目の訪問者です！</span>
+        <img src="1.gif" class="gif-decoration">
+    </div>
+
+    <!-- メインコンテンツ -->
+    <div class="main-90s">
+        <!-- サイドバー -->
+        <div class="sidebar-90s">
+            <!-- ナビゲーション -->
+            <div class="nav-90s">
+                <div class="box-title-90s">★MENU★</div>
+                <a href="#" onclick="if(window !== window.top) window.top.createOrShowWindow('browser', 'インターネット', 'main-content.html'); return false;">🏠 ホーム</a>
+                <a href="#" onclick="if(window !== window.top) window.top.createOrShowWindow('profile', 'プロフィール', 'profile.html'); return false;">👤 プロフィール</a>
+                <a href="#" onclick="if(window !== window.top) window.top.createOrShowWindow('diary', '日記', 'diary.html'); return false;">📖 日記</a>
+                <a href="#" onclick="if(window !== window.top) window.top.createOrShowWindow('hobby', '趣味', 'hobby.html'); return false;">🎮 趣味</a>
+                <a href="#" onclick="if(window !== window.top) window.top.createOrShowWindow('oekaki', 'お絵描き掲示板', 'oekaki.html'); return false;">🎨 お絵描き</a>
+                <a href="#" onclick="if(window !== window.top) window.top.createOrShowWindow('links', 'リンク集', 'links.html'); return false;">🔗 リンク集</a>
             </div>
-            <div class="gif-container">
-                <div class="scrolling">
-                    <div class="scrolling-content">
-                        <img src="cat-dance.gif" class="gif" alt="GIF 1">
-                        <img src="duck-dance.gif" class="gif" alt="GIF 2">
-                        <img src="cat-dance.gif" class="gif" alt="GIF 3">
-                        <img src="duck-dance.gif" class="gif" alt="GIF 4">
-                        <img src="cat-dance.gif" class="gif" alt="GIF 5">
-                        <img src="duck-dance.gif" class="gif" alt="GIF 6">
-                        <img src="cat-dance.gif" class="gif" alt="GIF 7">
-                        <img src="duck-dance.gif" class="gif" alt="GIF 8">
-                        <img src="cat-dance.gif" class="gif" alt="GIF 9">
-                        <img src="duck-dance.gif" class="gif" alt="GIF 10">
-                        <img src="cat-dance.gif" class="gif" alt="GIF 11">
-                        <img src="duck-dance.gif" class="gif" alt="GIF 12">
-                        <img src="cat-dance.gif" class="gif" alt="GIF 13">
-                        <img src="duck-dance.gif" class="gif" alt="GIF 14">
-                        <img src="cat-dance.gif" class="gif" alt="GIF 15">
-                        <img src="duck-dance.gif" class="gif" alt="GIF 16">
-                        <img src="cat-dance.gif" class="gif" alt="GIF 17">
-                        <img src="duck-dance.gif" class="gif" alt="GIF 18">
-                        <img src="cat-dance.gif" class="gif" alt="GIF 19">
-                        <img src="duck-dance.gif" class="gif" alt="GIF 20">
-                    </div>
-                    <div class="scrolling-content">
-                        <img src="cat-dance.gif" class="gif" alt="GIF 1">
-                        <img src="duck-dance.gif" class="gif" alt="GIF 2">
-                        <img src="cat-dance.gif" class="gif" alt="GIF 3">
-                        <img src="duck-dance.gif" class="gif" alt="GIF 4">
-                        <img src="cat-dance.gif" class="gif" alt="GIF 5">
-                        <img src="duck-dance.gif" class="gif" alt="GIF 6">
-                        <img src="cat-dance.gif" class="gif" alt="GIF 7">
-                        <img src="duck-dance.gif" class="gif" alt="GIF 8">
-                        <img src="cat-dance.gif" class="gif" alt="GIF 9">
-                        <img src="duck-dance.gif" class="gif" alt="GIF 10">
-                        <img src="cat-dance.gif" class="gif" alt="GIF 11">
-                        <img src="duck-dance.gif" class="gif" alt="GIF 12">
-                        <img src="cat-dance.gif" class="gif" alt="GIF 13">
-                        <img src="duck-dance.gif" class="gif" alt="GIF 14">
-                        <img src="cat-dance.gif" class="gif" alt="GIF 15">
-                        <img src="duck-dance.gif" class="gif" alt="GIF 16">
-                        <img src="cat-dance.gif" class="gif" alt="GIF 17">
-                        <img src="duck-dance.gif" class="gif" alt="GIF 18">
-                        <img src="cat-dance.gif" class="gif" alt="GIF 19">
-                        <img src="duck-dance.gif" class="gif" alt="GIF 20">
-                    </div>
-                </div>
+
+            <!-- プロフィール -->
+            <div class="box-90s">
+                <div class="box-title-90s">☆プロフィール☆</div>
+                <center>
+                    <img src="icon.jpg" alt="てんかう" width="80" height="80" class="profile-pic-90s spin-slow">
+                    <br>
+                    <span class="rainbow-text medium-text">てんかう</span>
+                    <br>
+                    <span class="glow-text small-text">地雷系女子大生</span>
+                    <br>
+                    <span class="tiny-text">好き：プログラミング、アニメ</span>
+                </center>
             </div>
-            <div class="access-counter-container">
-                <img src="star2.gif" alt="star" class="rotate-3d">
-                <p class="access-counter blink-text">あなたはこのサイトの訪問者です</p>
-                <img src="star2.gif" alt="star" class="rotate-3d">
-            </div>
-        </header>
-<nav class="dir-navbar">
-            <div class="folder-path">C:\てんかう\ホームページ</div>
-            <ul>
-                <li><span class="dir-folder">📁</span><a href="#" onclick="if(window !== window.top) window.top.createOrShowWindow('browser', 'インターネット', 'main-content.html'); return false;" class="active">ホーム</a></li>
-                <li><span class="dir-file-indicator">⌊</span><span class="dir-folder">📁</span><a href="#" onclick="if(window !== window.top) window.top.createOrShowWindow('profile', 'プロフィール', 'profile.html'); return false;">プロフィール</a></li>
-                <li><span class="dir-file-indicator">⌊</span><span class="dir-folder">📁</span><a href="#" onclick="if(window !== window.top) window.top.createOrShowWindow('diary', '日記', 'diary.html'); return false;">日記</a></li>
-                <li><span class="dir-file-indicator">⌊</span><span class="dir-folder">📁</span><a href="#" onclick="if(window !== window.top) window.top.createOrShowWindow('hobby', '趣味', 'hobby.html'); return false;">趣味</a></li>
-                <li><span class="dir-file-indicator">⌊</span><span class="dir-folder">📁</span><a href="#" onclick="if(window !== window.top) window.top.createOrShowWindow('oekaki', 'お絵描き掲示板', 'oekaki.html'); return false;">お絵描き掲示板</a></li>
-                <li><span class="dir-file-indicator">⌊</span><span class="dir-folder">📁</span><a href="#" onclick="if(window !== window.top) window.top.createOrShowWindow('links', 'リンク集', 'links.html'); return false;">リンク集</a></li>
-            </ul>
-        </nav>
-        
-        <div class="base">
-            <div class="hidari">
-                <div class="profile">
-                    <img src="icon.jpg" alt="プロフィールアイコン" class="profile-icon rotate-3d">
-                    <p class="profile-text">こんにちは、てんかうです！</p>
-                </div>
-            </div>
-            <div class="migi">                <h2 class="floating-title">◇◆ ようこそ ◆◇</h2>
-                <p><img src="2.gif" alt="■" width="15" height="15"> 当サイトへのご訪問ありがとうございます！</p>
-                <div class="content-box">
-                    <h3>◆ お知らせ ◆</h3>
-                    <p>2005年4月10日 サイトをリニューアルしました！</p>
-                    <p class="blink-text">現在カウンター設置工事中です</p>
-                </div>
-                
-                <hr class="retro-hr">
-                
-                <div class="content-box">
-                    <h3>◆ てんかうの独り言 ◆</h3>
-                    <p>てんかうなのだよん！</p>
-                    <p>プログラミングの勉強を始めました</p>
-                    <p>最果ての島に眠る宝を掘り起こせ！</p>
-                </div>
-                
-                <div class="music-player">
+
+            <!-- 音楽プレーヤー -->
+            <div class="box-90s">
+                <div class="box-title-90s">♪BGM♪</div>
+                <center>
                     <audio id="audio-player" loop>
                         <source src="bgm.mp3" type="audio/mp3">
                     </audio>
-                    <!-- JavaScriptによってボタンが追加されます -->
+                    <button id="play-button" class="button-90s">▶ PLAY</button>
+                </center>
+            </div>
+
+            <!-- 最新情報 -->
+            <div class="box-90s">
+                <div class="box-title-90s">NEWS</div>
+                <div class="small-text">
+                    <img src="2.gif" width="10" height="10"> 2005/04/10<br>
+                    <span class="blink-fast">サイトリニューアル！</span><br><br>
+                    <img src="2.gif" width="10" height="10"> 2005/03/25<br>
+                    掲示板設置しました<br><br>
+                    <img src="2.gif" width="10" height="10"> 2005/03/01<br>
+                    ホームページ開設！
                 </div>
             </div>
         </div>
-        
-        <footer class="footer">
-            <div class="footer-content">
-                <p>© 2024 てんかう. All rights reserved.</p>
+
+        <!-- メインコンテンツ -->
+        <div class="content-90s">
+            <!-- お知らせ -->
+            <div class="under-construction">
+                <img src="cat-dance.gif" width="50" height="50">
+                <span class="big-text">★工事中★UNDER CONSTRUCTION★工事中★</span>
+                <img src="duck-dance.gif" width="50" height="50">
             </div>
-        </footer>
+
+            <!-- ようこそメッセージ -->
+            <div class="box-90s">
+                <div class="box-title-90s">★★★ ようこそ ★★★</div>
+                <p class="glow-text medium-text">
+                    <img src="star2.gif" width="20" height="20">
+                    当サイトへのご訪問ありがとうございます！
+                    <img src="star2.gif" width="20" height="20">
+                </p>
+                <p class="rainbow-text">
+                    このサイトは1990年代風の地雷系ホームページです♪
+                </p>
+                <p>
+                    <span class="blink-slow">毎日更新中！</span>
+                    ブックマークして遊びに来てね〜☆
+                </p>
+            </div>
+
+            <!-- てんかうの独り言 -->
+            <div class="box-90s bg-pattern-2">
+                <div class="box-title-90s">♡てんかうの独り言♡</div>
+                <table width="100%" border="1" bordercolor="#ffff00">
+                    <tr bgcolor="#ff0066">
+                        <td class="small-text">
+                            <img src="star.gif" width="15" height="15">
+                            <span class="blink-fast">今日の気分：</span>
+                            <span class="huge-text">😊</span>
+                        </td>
+                    </tr>
+                    <tr bgcolor="#6600ff">
+                        <td>
+                            <p class="glow-text">プログラミングの勉強を始めました！</p>
+                            <p>HTMLとCSSが少しずつ分かってきた〜</p>
+                            <p><span class="rainbow-text">最果ての島に眠る宝を掘り起こせ！</span></p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- 好きなもの -->
+            <div class="box-90s">
+                <div class="box-title-90s">♥好きなもの♥</div>
+                <div style="text-align: left;">
+                    <img src="cat-dance.gif" width="30" height="30" class="spin-fast">
+                    <span class="retro-3d medium-text">アニメ</span><br>
+                    <img src="duck-dance.gif" width="30" height="30" class="spin-slow">
+                    <span class="glow-text medium-text">プログラミング</span><br>
+                    <img src="star2.gif" width="30" height="30" class="blink-fast">
+                    <span class="rainbow-text medium-text">インターネット</span><br>
+                    <img src="2.gif" width="30" height="30">
+                    <span class="retro-3d medium-text">ゲーム</span>
+                </div>
+            </div>
+
+            <!-- 最近の出来事 -->
+            <div class="box-90s bg-pattern-1">
+                <div class="box-title-90s">☆最近の出来事☆</div>
+                <ul>
+                    <li><span class="glow-text">ホームページを作りました！</span></li>
+                    <li><span class="rainbow-text">新しいアニメを見始めた</span></li>
+                    <li><span class="blink-slow">学校でプレゼンがあった</span></li>
+                    <li><span class="retro-3d">友達とカラオケに行った♪</span></li>
+                </ul>
+            </div>
+
+            <!-- リンクバナー -->
+            <div class="box-90s">
+                <div class="box-title-90s">★お友達サイト★</div>
+                <center>
+                    <p><span class="blink-fast">相互リンク募集中！</span></p>
+                    <img src="star.gif" width="100" height="20" alt="バナー例">
+                    <img src="star2.gif" width="100" height="20" alt="バナー例">
+                </center>
+            </div>
+        </div>
     </div>
-    
+
+    <!-- フッター -->
+    <div class="marquee-90s">
+        <span>© 2005 てんかう - このサイトはInternet Explorer 4.0以上推奨です - 1024x768推奨 - リンクフリーです♪</span>
+    </div>
+
     <script>
+        // 訪問者カウンター
         document.addEventListener('DOMContentLoaded', function() {
-            // アクセスカウンターの設定
-            let accessCount = localStorage.getItem('accessCount') || 0;
-            accessCount++;
-            localStorage.setItem('accessCount', accessCount);
-            
-            const accessCountElement = document.querySelector('.access-counter');
-            if (accessCountElement) {
-                accessCountElement.textContent = `あなたは ${accessCount} 番目のご主人様です。おかえりなさいニャン❤️`;
+            let count = localStorage.getItem('retro-count') || Math.floor(Math.random() * 9999) + 1000;
+            count = parseInt(count) + 1;
+            localStorage.setItem('retro-count', count);
+            document.getElementById('visitor-count').textContent = count;
+        });
+
+        // BGM再生
+        document.getElementById('play-button').addEventListener('click', function() {
+            const audio = document.getElementById('audio-player');
+            if (audio.paused) {
+                audio.play().then(() => {
+                    this.textContent = '❚❚ STOP';
+                }).catch(e => {
+                    this.textContent = '❌ ERROR';
+                });
+            } else {
+                audio.pause();
+                this.textContent = '▶ PLAY';
             }
         });
     </script>

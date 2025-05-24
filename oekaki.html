@@ -3,132 +3,280 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="HeTeMuLu Creator Ver.1.20β2">
-    <link rel="stylesheet" type="text/css" href="css.css">
-    <link rel="stylesheet" type="text/css" href="oekaki.css">
-    <link rel="stylesheet" type="text/css" href="directory-nav.css">
-    <title class="floating-title">てんかうのお絵描き掲示板</title>
-    <script src="vaporwave.js" defer></script>
-    <script src="oekaki.js" defer></script>
+    <title>★お絵描き掲示板★</title>
+    <link rel="stylesheet" type="text/css" href="retro90s.css">
+    <base target="_self">
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <div class="header-content">
-                <h1 class="site-title">★☆★ お絵描き掲示板 ★☆★</h1>
-                <p class="subtitle">〜自由にお絵描きしてね！〜</p>
-                <img src="star.gif" alt="キラキラ" class="decoration">
+    <!-- ヘッダー -->
+    <div class="header-90s">
+        <h1 class="title-90s retro-3d">
+            <img src="star2.gif" class="gif-decoration blink-fast">
+            ★お絵描き掲示板★
+            <img src="star2.gif" class="gif-decoration blink-fast">
+        </h1>
+        <div class="marquee-90s">
+            <span>🎨🎨🎨 みんなでお絵描き！へたっぴでもOK！楽しく描こう〜♪ 🎨🎨🎨</span>
+        </div>
+    </div>
+
+    <!-- 工事中お知らせ -->
+    <div class="under-construction">
+        <img src="cat-dance.gif" width="50" height="50">
+        <span class="big-text">★お絵描き掲示板準備中★COMING SOON★</span>
+        <img src="duck-dance.gif" width="50" height="50">
+    </div>
+
+    <!-- メインコンテンツ -->
+    <div class="main-90s">
+        <!-- サイドバー -->
+        <div class="sidebar-90s">
+            <!-- ナビゲーション -->
+            <div class="nav-90s">
+                <div class="box-title-90s">★MENU★</div>
+                <a href="#" onclick="if(window !== window.top) window.top.createOrShowWindow('browser', 'インターネット', 'main-content.html'); return false;">🏠 ホーム</a>
+                <a href="#" onclick="if(window !== window.top) window.top.createOrShowWindow('profile', 'プロフィール', 'profile.html'); return false;">👤 プロフィール</a>
+                <a href="#" onclick="if(window !== window.top) window.top.createOrShowWindow('diary', '日記', 'diary.html'); return false;">📖 日記</a>
+                <a href="#" onclick="if(window !== window.top) window.top.createOrShowWindow('hobby', '趣味', 'hobby.html'); return false;">🎮 趣味</a>
+                <a href="#" onclick="if(window !== window.top) window.top.createOrShowWindow('oekaki', 'お絵描き掲示板', 'oekaki.html'); return false;" style="background: #ff0099;">🎨 お絵描き</a>
+                <a href="#" onclick="if(window !== window.top) window.top.createOrShowWindow('links', 'リンク集', 'links.html'); return false;">🔗 リンク集</a>
             </div>
-            <div class="marquee-text">
-                <span>★★★ てんかうのお絵描き掲示板です！イラストや落書きを自由に描いてね！★★★</span>
-            </div>
-            <div class="access-counter-container">
-                <img src="star2.gif" alt="star" class="rotate-3d">
-                <p class="access-counter blink-text">あなたはこのページの訪問者です</p>
-                <img src="star2.gif" alt="star" class="rotate-3d">
-            </div>
-        </header>
-        
-        <nav class="dir-navbar">
-            <div class="folder-path">C:\てんかうの部屋\メニュー\</div>
-            <ul>
-                <li><span class="dir-folder">📁</span><a href="index.html">ホーム</a></li>
-                <li><span class="dir-file-indicator">⌊</span><span class="dir-folder">📁</span><a href="profile.html">プロフィール</a></li>
-                <li><span class="dir-file-indicator">⌊</span><span class="dir-folder">📁</span><a href="diary.html">日記</a></li>
-                <li><span class="dir-file-indicator">⌊</span><span class="dir-folder">📁</span><a href="hobby.html">趣味</a></li>
-                <li><span class="dir-file-indicator">⌊</span><span class="dir-folder">📁</span><a href="oekaki.html" class="active">お絵描き掲示板</a></li>
-                <li><span class="dir-file-indicator">⌊</span><span class="dir-folder">📁</span><a href="links.html">リンク集</a></li>
-            </ul>
-        </nav>
-        
-        <div class="base">
-            <div class="hidari">
-                <div class="profile">
-                    <img src="icon.jpg" alt="プロフィールアイコン" class="profile-icon rotate-3d">
-                    <p class="profile-text">こんにちは、てんかうです！</p>
-                </div>
-                
-                <div class="tool-panel">
-                    <h3>ツールパネル</h3>
-                    <div class="color-picker">
-                        <div class="color-option black selected" data-color="#000000"></div>
-                        <div class="color-option red" data-color="#FF0000"></div>
-                        <div class="color-option blue" data-color="#0000FF"></div>
-                        <div class="color-option green" data-color="#00FF00"></div>
-                        <div class="color-option yellow" data-color="#FFFF00"></div>
-                        <div class="color-option purple" data-color="#FF00FF"></div>
-                        <div class="color-option cyan" data-color="#00FFFF"></div>
-                    </div>
-                    
-                    <div class="brush-size">
-                        <label for="brush-slider">ペンの太さ:</label>
-                        <input type="range" id="brush-slider" min="1" max="20" value="3">
-                        <span id="brush-size-display">3px</span>
-                    </div>
-                    
-                    <div class="tool-buttons">
-                        <button id="clear-canvas">クリア</button>
-                        <button id="undo-button">元に戻す</button>
-                        <button id="save-image">保存する</button>
-                    </div>
+
+            <!-- 使い方 -->
+            <div class="box-90s">
+                <div class="box-title-90s">✏️使い方✏️</div>
+                <div class="tiny-text">
+                    <p><img src="1.gif" width="12" height="12"> キャンバスをクリック</p>
+                    <p><img src="2.gif" width="12" height="12"> 色を選択</p>
+                    <p><img src="star.gif" width="12" height="12"> 自由にお絵描き</p>
+                    <p class="blink-slow">✨上手じゃなくてもOK✨</p>
                 </div>
             </div>
-            
-            <div class="migi">
-                <div class="content-box">
-                    <h3>◆ お絵描きボード ◆</h3>
-                    <p>マウスでお絵描きできます。描いた絵は保存ボタンからダウンロードできます。</p>
-                    
-                    <div class="oekaki-container">
-                        <canvas id="drawing-board"></canvas>
+
+            <!-- お絵描きツール -->
+            <div class="box-90s">
+                <div class="box-title-90s">🎨ツール🎨</div>
+                <div style="text-align: center;">
+                    <button class="button-90s small-text" onclick="clearCanvas()">消去</button><br><br>
+                    <div class="small-text">
+                        <span class="glow-text">色：</span><br>
+                        <input type="color" id="colorPicker" value="#ff0066" style="width: 60px; height: 30px; border: 2px ridge #silver;">
                     </div>
-                    
-                    <div class="post-area">
-                        <textarea id="comment-area" placeholder="コメントを入力してね（任意）"></textarea>
-                        <button id="post-drawing">掲示板に投稿する</button>
+                    <br>
+                    <div class="tiny-text">
+                        <span class="rainbow-text">線の太さ：</span><br>
+                        <input type="range" id="brushSize" min="1" max="10" value="3" style="width: 80px;">
                     </div>
                 </div>
-                
-                <div class="content-box">
-                    <h3>◆ みんなの作品 ◆</h3>
-                    <div id="drawings-container" class="drawings-container">
-                        <!-- 投稿されたお絵描きがここに表示されます -->
-                        <div class="drawing-post">
-                            <div class="drawing-header">
-                                <span class="post-name">てんかう</span>
-                                <span class="post-date">2024年4月10日 12:34</span>
-                            </div>
-                            <div class="drawing-image-container">
-                                <img src="sample-drawing.png" alt="サンプルお絵描き" class="drawing-image">
-                            </div>
-                            <div class="drawing-comment">
-                                サンプルお絵描きです！みんなも描いてね！
-                            </div>
-                        </div>
-                    </div>
+            </div>
+
+            <!-- 最近の投稿 -->
+            <div class="box-90s">
+                <div class="box-title-90s">📝最近の投稿📝</div>
+                <div class="tiny-text">
+                    <p><img src="star2.gif" width="10" height="10"> てんかう: かわいい猫描いた〜♪</p>
+                    <p><img src="cat-dance.gif" width="10" height="10"> ゲスト: 初投稿です！</p>
+                    <p><img src="duck-dance.gif" width="10" height="10"> みかん: 落書きしてみました</p>
                 </div>
             </div>
         </div>
-        
-        <footer class="footer">
-            <div class="footer-content">
-                <p>© 2024 てんかう. All rights reserved.</p>
+
+        <!-- メインコンテンツ -->
+        <div class="content-90s">
+            <!-- お絵描きエリア -->
+            <div class="box-90s">
+                <div class="box-title-90s">🎨お絵描きキャンバス🎨</div>
+                <center>
+                    <canvas id="drawingCanvas" width="400" height="300" style="border: 3px ridge #ffff00; background: white; cursor: crosshair;"></canvas>
+                    <br><br>
+                    <button class="button-90s" onclick="saveDrawing()">💾 保存</button>
+                    <button class="button-90s" onclick="clearCanvas()">🗑️ 消去</button>
+                </center>
             </div>
-        </footer>
+
+            <!-- 投稿フォーム -->
+            <div class="box-90s bg-pattern-2">
+                <div class="box-title-90s">📝投稿フォーム📝</div>
+                <table width="100%" border="1" bordercolor="#ffff00">
+                    <tr bgcolor="#ff0066">
+                        <td class="glow-text small-text" width="20%">お名前：</td>
+                        <td><input type="text" id="userName" placeholder="ハンドル名" style="width: 200px; background: #ffff99; border: 1px inset #999;"></td>
+                    </tr>
+                    <tr bgcolor="#6600ff">
+                        <td class="glow-text small-text">コメント：</td>
+                        <td><textarea id="userComment" placeholder="コメントをどうぞ〜♪" rows="3" style="width: 200px; background: #ffff99; border: 1px inset #999;"></textarea></td>
+                    </tr>
+                    <tr bgcolor="#ff0066">
+                        <td colspan="2" style="text-align: center;">
+                            <button class="button-90s" onclick="postDrawing()">📮 投稿する</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- 作品ギャラリー -->
+            <div class="box-90s bg-pattern-1">
+                <div class="box-title-90s">🖼️みんなの作品ギャラリー🖼️</div>
+                
+                <!-- サンプル作品1 -->
+                <table width="100%" border="2" bordercolor="#00ffff" style="margin-bottom: 15px;">
+                    <tr bgcolor="#990099">
+                        <td class="small-text">
+                            <img src="star.gif" width="15" height="15"> 
+                            <span class="glow-text">投稿者：</span> 
+                            <span class="rainbow-text">てんかう</span>
+                            <span class="tiny-text">(2005/04/08 15:30)</span>
+                        </td>
+                    </tr>
+                    <tr bgcolor="#006600">
+                        <td style="text-align: center; padding: 10px;">
+                            <div style="width: 200px; height: 150px; background: white; border: 2px inset #999; display: inline-block; text-align: center; line-height: 150px; color: #666;">
+                                🐱 猫の絵<br>
+                                <span class="tiny-text">(サンプル画像)</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr bgcolor="#990099">
+                        <td class="small-text">
+                            💬 <span class="blink-slow">かわいい猫ちゃん描いてみました〜♪ へたっぴだけど気に入ってます！</span>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- サンプル作品2 -->
+                <table width="100%" border="2" bordercolor="#00ffff" style="margin-bottom: 15px;">
+                    <tr bgcolor="#006699">
+                        <td class="small-text">
+                            <img src="star2.gif" width="15" height="15"> 
+                            <span class="glow-text">投稿者：</span> 
+                            <span class="rainbow-text">ゲスト</span>
+                            <span class="tiny-text">(2005/04/07 20:15)</span>
+                        </td>
+                    </tr>
+                    <tr bgcolor="#660066">
+                        <td style="text-align: center; padding: 10px;">
+                            <div style="width: 200px; height: 150px; background: white; border: 2px inset #999; display: inline-block; text-align: center; line-height: 150px; color: #666;">
+                                🌸 桜の絵<br>
+                                <span class="tiny-text">(サンプル画像)</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr bgcolor="#006699">
+                        <td class="small-text">
+                            💬 <span class="retro-3d">春だから桜描いてみました！ピンク色がお気に入り〜</span>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- サンプル作品3 -->
+                <table width="100%" border="2" bordercolor="#00ffff" style="margin-bottom: 15px;">
+                    <tr bgcolor="#339900">
+                        <td class="small-text">
+                            <img src="2.gif" width="15" height="15"> 
+                            <span class="glow-text">投稿者：</span> 
+                            <span class="rainbow-text">みかん</span>
+                            <span class="tiny-text">(2005/04/06 12:45)</span>
+                        </td>
+                    </tr>
+                    <tr bgcolor="#990033">
+                        <td style="text-align: center; padding: 10px;">
+                            <div style="width: 200px; height: 150px; background: white; border: 2px inset #999; display: inline-block; text-align: center; line-height: 150px; color: #666;">
+                                🏠 お家の絵<br>
+                                <span class="tiny-text">(サンプル画像)</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr bgcolor="#339900">
+                        <td class="small-text">
+                            💬 <span class="glow-text">夢のマイホーム描いちゃいました♪ いつか本当に建てたいな〜</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- 掲示板ルール -->
+            <div class="box-90s">
+                <div class="box-title-90s">📏お絵描き掲示板のルール📏</div>
+                <div class="small-text">
+                    <p>🌟 みんなで楽しくお絵描きしましょう！</p>
+                    <p>🌟 <span class="blink-fast">上手じゃなくても全然OK</span></p>
+                    <p>🌟 他の人の作品には優しくコメント</p>
+                    <p>🌟 <span class="rainbow-text">いやがらせや悪口は禁止</span></p>
+                    <p>🌟 著作権のあるキャラは描かないでね</p>
+                    <p>🌟 <span class="glow-text">みんなで楽しい掲示板にしよう♪</span></p>
+                </div>
+            </div>
+        </div>
     </div>
-    
+
+    <!-- フッター -->
+    <div class="marquee-90s">
+        <span>🎨🎨🎨 お絵描き楽しんでね〜♪ 素敵な作品をお待ちしています！ 🎨🎨🎨</span>
+    </div>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // アクセスカウンターの設定
-            let accessCount = localStorage.getItem('oekakiAccessCount') || 0;
-            accessCount++;
-            localStorage.setItem('oekakiAccessCount', accessCount);
+        // キャンバス設定
+        const canvas = document.getElementById('drawingCanvas');
+        const ctx = canvas.getContext('2d');
+        const colorPicker = document.getElementById('colorPicker');
+        const brushSize = document.getElementById('brushSize');
+        
+        let isDrawing = false;
+        
+        // マウスイベント
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseout', stopDrawing);
+        
+        function startDrawing(e) {
+            isDrawing = true;
+            draw(e);
+        }
+        
+        function draw(e) {
+            if (!isDrawing) return;
             
-            const accessCountElement = document.querySelector('.access-counter');
-            if (accessCountElement) {
-                accessCountElement.textContent = `あなたは ${accessCount} 人目のお絵描き勇者様です！`;
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            ctx.lineWidth = brushSize.value;
+            ctx.lineCap = 'round';
+            ctx.strokeStyle = colorPicker.value;
+            
+            ctx.lineTo(x, y);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+        }
+        
+        function stopDrawing() {
+            if (isDrawing) {
+                isDrawing = false;
+                ctx.beginPath();
             }
-        });
+        }
+        
+        // キャンバス消去
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+        
+        // 保存機能（ダミー）
+        function saveDrawing() {
+            alert('保存機能は準備中です〜♪');
+        }
+        
+        // 投稿機能（ダミー）
+        function postDrawing() {
+            const name = document.getElementById('userName').value || 'ゲスト';
+            const comment = document.getElementById('userComment').value || 'コメントなし';
+            
+            if (confirm(`投稿者：${name}\nコメント：${comment}\n\n投稿しますか？`)) {
+                alert('投稿機能は準備中です〜♪\nもう少しお待ちください！');
+            }
+        }
     </script>
 </body>
 </html>

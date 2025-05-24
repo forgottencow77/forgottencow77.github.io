@@ -1,0 +1,313 @@
+/* 1990年代風地雷系ウェブサイトCSS */
+@import url('https://fonts.googleapis.com/css2?family=MS+Gothic&family=Comic+Sans+MS&display=swap');
+
+body {
+    font-family: "MS Gothic", "Comic Sans MS", "Arial", sans-serif;
+    margin: 0;
+    padding: 10px;
+    background: #ff00ff url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAABklEQVR4AewaftIAAAA0SURBVHXBwQ0AMAzEsJU/6aJ3cPAhZSdNTQhBCEEIQQhBCEEIQQhBCEEIQQhBCEEIQQjhAX7lBgPQU6CiAAAAAElFTkSuQmCC') repeat;
+    color: #ffff00;
+    cursor: url('star2.gif'), auto;
+    overflow-x: auto;
+}
+
+/* テーブルレイアウト */
+table {
+    border-collapse: separate;
+    border-spacing: 5px;
+}
+
+td {
+    vertical-align: top;
+    padding: 5px;
+}
+
+/* ヘッダー部分 */
+.header-90s {
+    background: linear-gradient(45deg, #ff0066, #6600ff, #00ff66, #ffff00);
+    background-size: 400% 400%;
+    animation: rainbow-bg 3s ease infinite;
+    border: 3px ridge #silver;
+    padding: 15px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+@keyframes rainbow-bg {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.title-90s {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffff00;
+    text-shadow: 3px 3px 0px #ff0066, -3px -3px 0px #00ff66;
+    animation: blink-title 1s infinite;
+    margin: 10px 0;
+}
+
+@keyframes blink-title {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0.7; }
+}
+
+/* メインコンテンツエリア */
+.main-90s {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.sidebar-90s {
+    display: table-cell;
+    width: 200px;
+    background: #000066;
+    border: 2px outset #6666ff;
+    padding: 10px;
+    vertical-align: top;
+}
+
+.content-90s {
+    display: table-cell;
+    background: #006600;
+    border: 2px inset #66ff66;
+    padding: 15px;
+    vertical-align: top;
+}
+
+/* ナビゲーション */
+.nav-90s {
+    background: #660066;
+    border: 1px solid #ff66ff;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+.nav-90s a {
+    display: block;
+    color: #ffff66;
+    text-decoration: none;
+    padding: 3px 5px;
+    margin: 2px 0;
+    background: #990099;
+    border: 1px outset #ff66ff;
+    font-size: 12px;
+}
+
+.nav-90s a:hover {
+    background: #ff0099;
+    border: 1px inset #ff66ff;
+    color: #ffffff;
+}
+
+/* コンテンツボックス */
+.box-90s {
+    background: #003366;
+    border: 2px ridge #6699ff;
+    margin: 10px 0;
+    padding: 10px;
+}
+
+.box-title-90s {
+    background: linear-gradient(90deg, #ff6600, #ffff00);
+    color: #000000;
+    font-weight: bold;
+    padding: 5px;
+    margin: -10px -10px 10px -10px;
+    border-bottom: 2px groove #6699ff;
+}
+
+/* テキストスタイル */
+.glow-text {
+    color: #00ffff;
+    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+    animation: glow-pulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow-pulse {
+    from { text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff; }
+    to { text-shadow: 0 0 15px #00ffff, 0 0 25px #00ffff, 0 0 35px #00ffff; }
+}
+
+.rainbow-text {
+    background: linear-gradient(45deg, #ff0000, #ff7700, #ffff00, #00ff00, #0077ff, #0000ff, #7700ff);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: rainbow-text 3s ease infinite;
+    font-weight: bold;
+}
+
+@keyframes rainbow-text {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* スクロールするテキスト */
+.marquee-90s {
+    background: #000000;
+    color: #00ff00;
+    padding: 5px;
+    border: 1px solid #00ff00;
+    margin: 10px 0;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.marquee-90s span {
+    display: inline-block;
+    padding-left: 100%;
+    animation: scroll-left 15s linear infinite;
+}
+
+@keyframes scroll-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+/* GIFアニメーション */
+.gif-decoration {
+    display: inline-block;
+    margin: 0 5px;
+    vertical-align: middle;
+}
+
+/* リンクスタイル */
+a {
+    color: #ffff00;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+a:visited {
+    color: #ff66ff;
+}
+
+a:hover {
+    color: #00ffff;
+    background: #ff0066;
+    text-decoration: none;
+}
+
+/* ボタンスタイル */
+.button-90s {
+    background: linear-gradient(45deg, #ff0066, #6600ff);
+    color: #ffffff;
+    border: 2px outset #silver;
+    padding: 5px 15px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.button-90s:hover {
+    background: linear-gradient(45deg, #6600ff, #ff0066);
+    border: 2px inset #silver;
+}
+
+/* カウンター */
+.counter-90s {
+    background: #000000;
+    color: #00ff00;
+    border: 2px inset #666666;
+    padding: 5px;
+    font-family: "Courier New", monospace;
+    text-align: center;
+    margin: 10px 0;
+}
+
+/* 工事中マーク */
+.under-construction {
+    background: #ffff00;
+    color: #ff0000;
+    border: 3px dashed #ff0000;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    animation: construction-blink 1s infinite;
+}
+
+@keyframes construction-blink {
+    0%, 50% { background: #ffff00; }
+    51%, 100% { background: #ff0000; color: #ffff00; }
+}
+
+/* 背景パターン */
+.bg-pattern-1 {
+    background: repeating-linear-gradient(
+        45deg,
+        #ff0066 0px,
+        #ff0066 10px,
+        #6600ff 10px,
+        #6600ff 20px
+    );
+}
+
+.bg-pattern-2 {
+    background: radial-gradient(circle at 25% 25%, #ffff00 2px, transparent 2px),
+                radial-gradient(circle at 75% 75%, #00ffff 2px, transparent 2px),
+                #ff0066;
+    background-size: 20px 20px;
+}
+
+/* フォントサイズ色々 */
+.huge-text { font-size: 36px; }
+.big-text { font-size: 24px; }
+.medium-text { font-size: 18px; }
+.small-text { font-size: 12px; }
+.tiny-text { font-size: 10px; }
+
+/* 立体テキスト */
+.retro-3d {
+    color: #ffff00;
+    text-shadow: 
+        1px 1px 0px #ff0066,
+        2px 2px 0px #ff0066,
+        3px 3px 0px #ff0066,
+        4px 4px 0px #ff0066,
+        5px 5px 0px #ff0066;
+}
+
+/* スピン系アニメーション */
+.spin-slow {
+    animation: spin 4s linear infinite;
+}
+
+.spin-fast {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* 点滅系 */
+.blink-slow {
+    animation: blink 2s infinite;
+}
+
+.blink-fast {
+    animation: blink 0.5s infinite;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* プロフィール画像スタイル */
+.profile-pic-90s {
+    border: 3px ridge #gold;
+    animation: profile-bounce 3s ease-in-out infinite;
+}
+
+@keyframes profile-bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+} 
