@@ -1,205 +1,124 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>てんかうOS - 1990年代地雷系オペレーティングシステム</title>
+    <title>TenkauOS - Professional Portfolio</title>
     <link rel="stylesheet" type="text/css" href="os-theme.css">
-    <link rel="stylesheet" type="text/css" href="crt-effect.css">
-    <script src="crt-effect.js" defer></script>
-    <script src="vaporwave.js" defer></script>
-    <base target="_blank">
+    <!-- FontAwesome for Icons (simulated via CDN or just text characters if offline) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <!-- レトロスキャンライン効果 -->
-    <div class="retro-scanlines"></div>
-    
-    <!-- デスクトップショートカット -->
-    <div class="desktop-shortcuts">
-        <a class="shortcut" data-window="browser" data-title="Browser" data-src="main-content.html">
-            <img src="browser.png" alt="Browser" width="32" height="32">
-            <span>Browser</span>
-        </a>
-        <a class="shortcut" data-window="explorer" data-title="Explorer" data-src="directory.html">
-            <img src="folder.png" alt="Explorer" width="32" height="32">
-            <span>Explorer</span>
-        </a>
-        <a class="shortcut" data-window="profile" data-title="Profile" data-src="profile.html">
-            <img src="icon.jpg" alt="Profile" width="32" height="32">
-            <span>Profile</span>
-        </a>
-        <a class="shortcut" data-window="oekaki" data-title="Canvas" data-src="oekaki.html">
-            <img src="star2.gif" alt="Canvas" width="32" height="32">
-            <span>Canvas</span>
-        </a>
-        <a class="shortcut" data-window="diary" data-title="Blog" data-src="diary.html">
-            <img src="cat-dance.gif" alt="Blog" width="32" height="32">
-            <span>Blog</span>
-        </a>
-        <a class="shortcut" data-window="hobby" data-title="Projects" data-src="hobby.html">
-            <img src="duck-dance.gif" alt="Projects" width="32" height="32">
-            <span>Projects</span>
-        </a>
-        <a class="shortcut" data-window="links" data-title="Links" data-src="links.html">
-            <img src="star.gif" alt="Links" width="32" height="32">
-            <span>Links</span>
-        </a>
+
+    <!-- Boot Screen -->
+    <div id="loading-screen">
+        <div class="apple-logo"></div>
+        <div class="loading-bar-container">
+            <div class="loading-bar" id="progress-bar"></div>
+        </div>
     </div>
 
-    <div id="os-background" class="os-container">
-        <div class="desktop">
-            <!-- アプリケーションウィンドウ用のコンテナ -->
-            <div id="windows-container"></div>
+    <!-- Top Menu Bar -->
+    <div class="menu-bar">
+        <div class="menu-left">
+            <span class="apple-menu-icon"></span>
+            <span class="app-name">Finder</span>
+            <div class="menu-items">
+                <span>File</span>
+                <span>Edit</span>
+                <span>View</span>
+                <span>Go</span>
+                <span>Window</span>
+                <span>Help</span>
+            </div>
+        </div>
+        <div class="menu-right">
+            <i class="fas fa-battery-full"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-search"></i>
+            <i class="fas fa-sliders-h control-center-icon"></i>
+            <span id="clock">Mon Nov 26 9:41 AM</span>
+        </div>
+    </div>
 
-            <!-- ウィンドウのテンプレート -->
-            <template id="window-template">
-                <div class="window">
-                    <div class="window-titlebar">
-                        <div class="window-title"></div>
-                        <div class="window-controls">
-                            <button class="window-button window-minimize">_</button>
-                            <button class="window-button window-maximize">□</button>
-                            <button class="window-button window-close">×</button>
-                        </div>
-                    </div>
-                    <div class="window-content">
-                        <iframe frameborder="0" class="original-container"></iframe>
-                    </div>
-                </div>
-            </template>
+    <!-- Desktop Environment -->
+    <div class="desktop" id="desktop-area">
+        
+        <!-- Desktop Icons (Right aligned) -->
+        <div class="desktop-icons">
+            <div class="desktop-icon" onclick="createOrShowWindow('explorer', 'Macintosh HD', 'directory.html')">
+                <img src="folder.png" alt="Drive">
+                <span>Macintosh HD</span>
+            </div>
+            <div class="desktop-icon" onclick="createOrShowWindow('profile', 'Resume.pdf', 'profile.html')">
+                <img src="icon.jpg" alt="Profile" style="border-radius: 2px;">
+                <span>Resume.pdf</span>
+            </div>
         </div>
 
-        <!-- タスクバー -->
-        <div class="taskbar">
-            <button class="start-button">🏠 Start</button>
-            <div class="app-icons">
-                <a class="app-icon" data-window="browser" data-title="Browser" data-src="main-content.html">
-                    <img src="browser.png" alt="Browser" width="32" height="32">
-                    <div class="app-tooltip">Browser</div>
-                </a>
-                <a class="app-icon" data-window="explorer" data-title="Explorer" data-src="directory.html">
-                    <img src="folder.png" alt="Explorer" width="32" height="32">
-                    <div class="app-tooltip">Explorer</div>
-                </a>
-                <a class="app-icon" data-window="profile" data-title="Profile" data-src="profile.html">
-                    <img src="icon.jpg" alt="Profile" width="32" height="32">
-                    <div class="app-tooltip">Profile</div>
-                </a>
-                <a class="app-icon" data-window="diary" data-title="Blog" data-src="diary.html">
-                    <img src="cat-dance.gif" alt="Blog" width="32" height="32">
-                    <div class="app-tooltip">Blog</div>
-                </a>
-                <a class="app-icon" data-window="hobby" data-title="Projects" data-src="hobby.html">
-                    <img src="duck-dance.gif" alt="Projects" width="32" height="32">
-                    <div class="app-tooltip">Projects</div>
-                </a>
-                <a class="app-icon" data-window="links" data-title="Links" data-src="links.html">
-                    <img src="star.gif" alt="Links" width="32" height="32">
-                    <div class="app-tooltip">Links</div>
-                </a>
-                <a class="app-icon" data-window="oekaki" data-title="Canvas" data-src="oekaki.html">
-                    <img src="star2.gif" alt="Canvas" width="32" height="32">
-                    <div class="app-tooltip">Canvas</div>
-                </a>
+        <!-- Window Container -->
+        <div id="windows-container"></div>
+
+        <!-- Window Template -->
+        <template id="window-template">
+            <div class="window">
+                <div class="window-titlebar">
+                    <div class="window-controls">
+                        <div class="traffic-light traffic-close"></div>
+                        <div class="traffic-light traffic-minimize"></div>
+                        <div class="traffic-light traffic-maximize"></div>
+                    </div>
+                    <div class="window-title">Application</div>
+                </div>
+                <div class="window-content">
+                    <iframe frameborder="0"></iframe>
+                </div>
             </div>
-            <div class="taskbar-time">00:00</div>
+        </template>
+
+    </div>
+
+    <!-- Dock -->
+    <div class="dock-container">
+        <div class="dock">
+            <div class="dock-item" onclick="createOrShowWindow('finder', 'Finder', 'directory.html')">
+                <div class="dock-tooltip">Finder</div>
+                <img src="https://cdn-icons-png.flaticon.com/512/3767/3767084.png" alt="Finder"> <!-- Placeholder Finder Icon -->
+                <div class="dock-dot"></div>
+            </div>
+            <div class="dock-item" onclick="createOrShowWindow('browser', 'Safari', 'main-content.html')">
+                <div class="dock-tooltip">Safari</div>
+                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968764.png" alt="Safari"> <!-- Placeholder Safari Icon -->
+                <div class="dock-dot"></div>
+            </div>
+            <div class="dock-item" onclick="createOrShowWindow('profile', 'Profile', 'profile.html')">
+                <div class="dock-tooltip">Profile</div>
+                <img src="icon.jpg" alt="Profile" style="border-radius: 10px;">
+                <div class="dock-dot"></div>
+            </div>
+            <div class="dock-item" onclick="createOrShowWindow('diary', 'Blog', 'diary.html')">
+                <div class="dock-tooltip">Blog</div>
+                <img src="cat-dance.gif" alt="Blog" style="border-radius: 10px;">
+                <div class="dock-dot"></div>
+            </div>
+            <div class="dock-item" onclick="createOrShowWindow('hobby', 'Projects', 'hobby.html')">
+                <div class="dock-tooltip">Projects</div>
+                <img src="duck-dance.gif" alt="Projects" style="border-radius: 10px;">
+                <div class="dock-dot"></div>
+            </div>
+            <div class="dock-item" onclick="createOrShowWindow('oekaki', 'Canvas', 'oekaki.html')">
+                <div class="dock-tooltip">Canvas</div>
+                <img src="star2.gif" alt="Canvas" style="border-radius: 10px;">
+                <div class="dock-dot"></div>
+            </div>
+            <div class="dock-item" onclick="createOrShowWindow('links', 'Links', 'links.html')">
+                <div class="dock-tooltip">Links</div>
+                <img src="star.gif" alt="Links" style="border-radius: 10px;">
+                <div class="dock-dot"></div>
+            </div>
         </div>
     </div>
 
     <script src="os-interface.js"></script>
-
-    <script>
-        // 追加のエフェクト
-        document.addEventListener('DOMContentLoaded', function() {
-            // 時々グリッチエフェクトを発生させる
-            setInterval(() => {
-                if (Math.random() < 0.01) { // 1%の確率で
-                    document.body.style.filter = 'hue-rotate(' + (Math.random() * 360) + 'deg) saturate(2)';
-                    setTimeout(() => {
-                        document.body.style.filter = '';
-                    }, 100);
-                }
-            }, 1000);
-
-            // ネオンカーソルの軌跡エフェクト
-            let trail = [];
-            document.addEventListener('mousemove', function(e) {
-                if (Math.random() > 0.9) { // 10%の確率でトレイル作成
-                    const trailElement = document.createElement('div');
-                    trailElement.style.cssText = `
-                        position: fixed;
-                        width: 4px;
-                        height: 4px;
-                        background: radial-gradient(circle, #ff00ff, transparent);
-                        border-radius: 50%;
-                        pointer-events: none;
-                        z-index: 9997;
-                        left: ${e.clientX}px;
-                        top: ${e.clientY}px;
-                        opacity: 1;
-                        transition: opacity 0.5s ease-out;
-                    `;
-                    document.body.appendChild(trailElement);
-                    
-                    setTimeout(() => {
-                        trailElement.style.opacity = '0';
-                        setTimeout(() => {
-                            if (trailElement.parentNode) {
-                                trailElement.parentNode.removeChild(trailElement);
-                            }
-                        }, 500);
-                    }, 100);
-                }
-            });
-
-            // 起動時の歓迎メッセージ
-            setTimeout(() => {
-                const welcomeMsg = document.createElement('div');
-                welcomeMsg.style.cssText = `
-                    position: fixed;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    background: linear-gradient(135deg, rgba(0,0,51,0.95), rgba(102,0,204,0.95));
-                    color: #00ffff;
-                    padding: 20px;
-                    border: 2px solid #ff00ff;
-                    border-radius: 10px;
-                    text-align: center;
-                    z-index: 5000;
-                    box-shadow: 0 0 30px rgba(255,0,255,0.5);
-                    backdrop-filter: blur(10px);
-                    animation: pulse 2s ease-in-out infinite;
-                `;
-                welcomeMsg.innerHTML = `
-                    <h2 style="margin: 0 0 10px 0; text-shadow: 0 0 15px #00ffff;">
-                        ★ Welcome to TenkauOS ★
-                    </h2>
-                    <p style="margin: 0; font-size: 14px;">
-                        Professional Portfolio System
-                    </p>
-                `;
-                document.body.appendChild(welcomeMsg);
-
-                // 3秒後に自動で消す
-                setTimeout(() => {
-                    welcomeMsg.style.opacity = '0';
-                    welcomeMsg.style.transform = 'translate(-50%, -50%) scale(0.8)';
-                    setTimeout(() => {
-                        if (welcomeMsg.parentNode) {
-                            welcomeMsg.parentNode.removeChild(welcomeMsg);
-                        }
-                    }, 500);
-                }, 3000);
-            }, 2000);
-        });
-    </script>
-
-    <style>
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 30px rgba(255,0,255,0.5); }
-            50% { box-shadow: 0 0 50px rgba(0,255,255,0.8); }
-        }
-    </style>
 </body>
 </html>
