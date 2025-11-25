@@ -8,7 +8,7 @@ body {
     height: 100vh;
     overflow: hidden;
     position: relative;
-    cursor: url('star2.gif'), auto !important; /* 地雷系カーソル復活 */
+    cursor: default;
 }
 
 /* 地雷系カーソルエフェクト */
@@ -17,11 +17,11 @@ body * {
 }
 
 a, button, .shortcut, .app-icon, .start-button, .window-button {
-    cursor: url('star.gif'), pointer !important;
+    cursor: pointer;
 }
 
 .window-titlebar {
-    cursor: url('cat-dance.gif'), move !important;
+    cursor: move;
 }
 
 /* ネオン効果を追加 */

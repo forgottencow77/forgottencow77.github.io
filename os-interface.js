@@ -69,10 +69,9 @@ function setupUIInteractions() {
         shortcut.addEventListener('dblclick', function(e) {
             e.preventDefault();
             const windowId = this.getAttribute('data-window');
-            const win = document.querySelector(`#window-${windowId}`);
-            if (win) {
-                toggleMaximize(win);
-            }
+            const title = this.getAttribute('data-title');
+            const src = this.getAttribute('data-src');
+            createOrShowWindow(windowId, title, src);
         });
     });
     
@@ -111,31 +110,31 @@ function setupStartMenu() {
         startMenu.className = 'start-menu';
         startMenu.innerHTML = `
             <div class="start-menu-header">
-                <img src="icon.jpg" alt="ユーザー" class="start-user-icon">
-                <span class="start-user-name">てんかう</span>
+                <img src="icon.jpg" alt="User" class="start-user-icon">
+                <span class="start-user-name">Tenkau</span>
             </div>
             <div class="start-menu-apps">
-                <div class="start-menu-item" data-window="browser" data-title="インターネット" data-src="main-content.html">
-                    <img src="browser.png" alt="ブラウザ">
-                    <span>インターネット</span>
+                <div class="start-menu-item" data-window="browser" data-title="Browser" data-src="main-content.html">
+                    <img src="browser.png" alt="Browser">
+                    <span>Browser</span>
                 </div>
-                <div class="start-menu-item" data-window="explorer" data-title="エクスプローラー" data-src="directory.html">
-                    <img src="folder.png" alt="フォルダ">
-                    <span>エクスプローラー</span>
+                <div class="start-menu-item" data-window="explorer" data-title="Explorer" data-src="directory.html">
+                    <img src="folder.png" alt="Folder">
+                    <span>Explorer</span>
                 </div>
-                <div class="start-menu-item" data-window="profile" data-title="プロフィール" data-src="profile.html">
-                    <img src="icon.jpg" alt="プロフィール">
-                    <span>プロフィール</span>
+                <div class="start-menu-item" data-window="profile" data-title="Profile" data-src="profile.html">
+                    <img src="icon.jpg" alt="Profile">
+                    <span>Profile</span>
                 </div>
-                <div class="start-menu-item" data-window="oekaki" data-title="お絵描き掲示板" data-src="oekaki.html">
-                    <img src="star2.gif" alt="お絵描き">
-                    <span>お絵描き掲示板</span>
+                <div class="start-menu-item" data-window="oekaki" data-title="Canvas" data-src="oekaki.html">
+                    <img src="star2.gif" alt="Canvas">
+                    <span>Canvas</span>
                 </div>
             </div>
             <div class="start-menu-footer">
                 <div class="start-menu-item shutdown">
                     <span>💻</span>
-                    <span>シャットダウン</span>
+                    <span>Shutdown</span>
                 </div>
             </div>
         `;
@@ -330,7 +329,7 @@ function showWindow(win) {
     setTimeout(() => {
         win.classList.remove('appearing');
         win.classList.add('active');
-    }, 400);
+    }, 600);
     
     updateTaskbarIcon(win.id.replace('window-', ''), true);
 }
@@ -342,7 +341,7 @@ function hideWindow(win) {
     setTimeout(() => {
         win.style.display = 'none';
         win.classList.remove('active', 'minimizing');
-    }, 300);
+    }, 400);
     
     updateTaskbarIcon(win.id.replace('window-', ''), false);
 }
@@ -364,13 +363,20 @@ function toggleMaximize(win) {
     
     if (win.dataset.maximized === 'true') {
         // 元のサイズに戻す
-        win.style.width = '800px';
-        win.style.height = '600px';
-        win.style.top = '10%';
-        win.style.left = '50%';
-        win.style.transform = 'translateX(-50%)';
+        win.style.width = win.dataset.prevWidth || '800px';
+        win.style.height = win.dataset.prevHeight || '600px';
+        win.style.top = win.dataset.prevTop || '10%';
+        win.style.left = win.dataset.prevLeft || '50%';
+        win.style.transform = win.dataset.prevTransform || 'translateX(-50%)';
         win.dataset.maximized = 'false';
     } else {
+        // 現在の状態を保存
+        win.dataset.prevWidth = win.style.width;
+        win.dataset.prevHeight = win.style.height;
+        win.dataset.prevTop = win.style.top;
+        win.dataset.prevLeft = win.style.left;
+        win.dataset.prevTransform = win.style.transform;
+
         // 最大化
         win.style.width = '100%';
         win.style.height = 'calc(100vh - 40px)'; // タスクバーの高さを除く
@@ -426,11 +432,11 @@ function showShutdownScreen() {
     shutdownOverlay.className = 'shutdown-overlay';
     shutdownOverlay.innerHTML = `
         <div class="shutdown-dialog">
-            <h2>てんかうOS をシャットダウンしています...</h2>
+            <h2>Shutting down TenkauOS...</h2>
             <div class="shutdown-progress">
                 <div class="shutdown-bar"></div>
             </div>
-            <p>しばらくお待ちください</p>
+            <p>Please wait...</p>
         </div>
     `;
     
